@@ -1,0 +1,245 @@
+<div class="min-vh-100 d-flex flex-column">
+  <div
+    data-target=".navbar-fixed-top"
+    style="background-image: url(assets/carousel/M.jpg); background-size: cover"
+  >
+    <nav
+      class="navbar navbar-expand-lg w-100"
+      style="
+        background-color: rgba(39, 38, 38, 0.466);
+        padding-left: 20px;
+        padding-right: 20px;
+      "
+    >
+      <a href="#" title="Retour à l'accueil">
+        <img src="assets/icones/p.png" style="height: 58px" alt="Logo SUMAG" />
+      </a>
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarText"
+        aria-controls="navbarText"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+        <span class="navbar-text" style="position: relative; top: 3px">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link text-white underline-linkk"
+                href="#"
+                routerLink="/Apropos"
+                ><span class="fa fa-comment"></span> A Propos</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white underline-linkk"
+                ><span class="fa fa-users"></span> Communauté</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white underline-linkk" href="/admin"
+                ><span class="fa fa-lock"></span> Mon Compte</a
+              >
+            </li>
+          </ul>
+        </span>
+      </div>
+    </nav>
+    <div id="container">
+      <div id="body">
+        <div class="container-fluid">
+          <!-- Subtitle -->
+          <div class="row" id="sumag_description">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+              <h2 class="text-center pt-2 pb-2" id="sub_top_title">
+                PLATEFORME DE SUIVI DES MANGROVES DU GABON
+              </h2>
+            </div>
+            <div class="col-md-1"></div>
+          </div>
+        </div>
+
+        <div class="row" id="modules">
+          <div class="col-md-1"></div>
+          <div class="col-sm-5">
+            <a routerLink="map" id="mapLink">
+              <img
+                src="assets/icones/carte_icon.png"
+                id="map-icon"
+                alt="Explore the Map"
+                class="img-responsive module-icon"
+              />
+              <h3
+                id="Module1"
+                class="text-center module-title"
+                style="color: #ffffff"
+              >
+                Cartographie des mangroves
+              </h3>
+            </a>
+          </div>
+
+          <div class="col-sm-5">
+            <a routerLink="documentation" id="mapLink">
+              <img
+                src="assets/icones/doc_icon.png"
+                id="docs-icon"
+                alt="Analyze the Data"
+                class="img-responsive module-icon"
+              />
+              <h3
+                id="Module1"
+                class="text-center module-title"
+                style="color: #ffffff"
+              >
+                Ressources
+              </h3>
+            </a>
+          </div>
+          <div class="col-md-1"></div>
+        </div>
+        <br /><br /><br />
+
+        <div class="static-img d-none d-lg-block d-xl-block">
+          <img src="assets/partenaires/sco.jpg" class="img-fluid" alt="SCO" />
+        </div>
+
+        <div class="container col-12 d-none d-md-block" id="tout_partenaires">
+          <div class="justify-content-center">
+            <section class="customer-logos slider justify-content-center">
+              <!-- <div class="slide">
+                    <a href="https://www.ageos.ga" target="_blank" rel="noopener noreferrer">
+                        <img src="assets/partenaires/ageos.jpg" class="img-fluid" alt="AGEOS" >
+                    </a>
+                </div>
+                <div class="slide">
+                    <a href="https://www.undp.org/fr/gabon" target="_blank" rel="noopener noreferrer">
+                        <img src="assets/partenaires/pnud.jpg" class="img-fluid" alt="PNUD" >
+                    </a>
+                </div> -->
+
+              <div class="slide">
+                <a
+                  href="https://www.ageos.ga"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="assets/partenaires/ageos.jpg"
+                    class="img-fluid"
+                    alt="AGEOS"
+                    style="
+                      width: 142px;
+                      height: 70px;
+                      position: relative;
+                      bottom: 21px;
+                    "
+                  />
+                </a>
+              </div>
+              <div class="slide">
+                <a
+                  href="https://www.undp.org/fr/gabon"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="assets/partenaires/pnud_logo_cle8bfe11-5-326e8.png"
+                    class="img-fluid"
+                    alt="PNUD"
+                    style="width: 80%; position: relative"
+                  />
+                </a>
+              </div>
+              <div class="slide">
+                <a
+                  href="https://univuob.org/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="assets/partenaires/uob.webp"
+                    class="img-fluid"
+                    alt="UOB"
+                  />
+                </a>
+              </div>
+              <div class="slide justify-content-center">
+                <a
+                  href="https://www.eaux-forets.gouv.ga"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="assets/partenaires/ef-.png"
+                    class="img-fluid"
+                    alt="Eaux et forêts"
+                  />
+                </a>
+              </div>
+              <div class="slide">
+                <a
+                  href="https://univ-masuku.org/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="assets/partenaires/ustm.png"
+                    class="img-fluid"
+                    alt="HCECV"
+                  />
+                </a>
+              </div>
+
+              <div class="slide">
+                <a
+                  href="https://www.parcsgabon.ga"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="assets/partenaires/Parcs-Gabon-1.png"
+                    class="img-fluid"
+                    alt="Parcs"
+                  />
+                </a>
+              </div>
+
+              <div class="slide">
+                <a
+                  href="https://www.cnc.ga"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="assets/partenaires/CNC.png"
+                    class="img-fluid"
+                    alt="CNC"
+                  />
+                </a>
+              </div>
+
+              <!-- <div class="slide">
+                    <a href="http://www.libreville.ga/" target="_blank" rel="noopener noreferrer">
+                        <img src="assets/partenaires/mairie-lbv.png" class="img-fluid" alt="Mairie de Libreville">
+                    </a>
+                </div> -->
+            </section>
+          </div>
+        </div>
+      </div>
+      <br /><br /><br /><br /><br /><br /><br /><br />
+
+      <app-footer></app-footer>
+    </div>
+  </div>
+</div>

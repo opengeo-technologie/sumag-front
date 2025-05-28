@@ -1,0 +1,1066 @@
+<div id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+  <div id="container">
+    <nav
+      class="navbar navbar-expand-lg bg-body-tertiary"
+      style="background-color: #2f4f4f"
+    >
+      <div class="container-fluid">
+        <!-- <a class="navbar-brand" href="#"> <h1 class="text-white"> SUMAG</h1> </a> -->
+        <a href="#" title="Retour à l'accueil">
+          <img
+            src="assets/icones/p.png"
+            style="height: 60px"
+            alt="Logo SUMAG"
+          />
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarText"
+          aria-controls="navbarText"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+          <span class="navbar-text" style="position: relative; top: 6px">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a
+                  class="nav-link text-white underline-linkk"
+                  href="https://snornf.ga/"
+                  target="_blank"
+                >
+                  Snornf</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link text-white underline-linkk"
+                  href="#"
+                  routerLink="/documentation"
+                  ><span class="fa fa-file"></span> Documentation</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link text-white underline-linkk"
+                  href="#"
+                  routerLink="/Apropos"
+                  ><span class="fa fa-comment"></span> A Propos</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white underline-linkk"
+                  ><span class="fa fa-users"></span> Communauté</a
+                >
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link text-white underline-linkk" href="/admin"
+                  ><span class="fa fa-lock"></span> Mon Compte</a
+                >
+              </li>
+            </ul>
+          </span>
+        </div>
+      </div>
+    </nav>
+    <header>
+      <div class="row">
+        <div class="row" id="header2">
+          <div class="col-md-3">
+            <a routerLink="/" style="text-decoration: none">
+              <h3>
+                Suivi <br />
+                des Mangroves <br />
+                du Gabon
+              </h3>
+            </a>
+          </div>
+          <div class="col-md-6"></div>
+          <div class="col-md-3 logo_sco">
+            <img src="assets/partenaires/sco_sf.png" alt="Logo SCO Gabon" />
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div id="body">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-4" id="right_menu">
+            <div
+              id="carouselContent"
+              class="carousel slide"
+              data-bs-ride="false"
+              data-bs-interval="false"
+            >
+              <div class="carousel-inner">
+                <!-- Slide 1 : Tableau de bord statistique -->
+                <div class="carousel-item active" id="occ">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="row">
+                        <ul class="nav nav-tabs nav-fill">
+                          <li class="nav-item">
+                            <a
+                              class="nav-link active"
+                              href="#couches-thematiques"
+                              role="tab"
+                              data-bs-toggle="tab"
+                              (click)="selectedTab(0)"
+                            >
+                              <div class="d-flex align-items-center">
+                                <i class="fg-pyramid fg-2x"></i>
+                                <span
+                                  class="fw-bold fs-8"
+                                  style="padding-left: 10px"
+                                  >Couches</span
+                                >
+                              </div>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a
+                              class="nav-link"
+                              href="#statistiques"
+                              role="tab"
+                              data-bs-toggle="tab"
+                              (click)="selectedTab(1)"
+                              id="#statistiques"
+                            >
+                              <div class="d-flex align-items-center">
+                                <i class="fg-profile fg-2x"></i>
+                                <span
+                                  class="fw-bold fs-8"
+                                  style="padding-left: 10px"
+                                  >Statistiques</span
+                                >
+                              </div></a
+                            >
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="card-body" style="height: 81vh; padding: 0px">
+                      <div
+                        class="tab-content"
+                        style="max-height: 81vh; overflow-y: auto"
+                      >
+                        <!-- Affichage de la data des couches thematiques et alertes -->
+                        <div class="tab-pane active" id="couches-thematiques">
+                          <div class="accordion" id="main_themes">
+                            <div class="accordion-item">
+                              <h2 class="accordion-header" id="occupation_sol">
+                                <button
+                                  class="accordion-button"
+                                  type="button"
+                                  data-bs-toggle="collapse"
+                                  data-bs-target="#occupation_sol_content"
+                                  aria-expanded="true"
+                                  aria-controls="occupation_sol_content"
+                                  id="bt"
+                                >
+                                  Occupation du sol
+                                </button>
+                              </h2>
+                              <div
+                                id="occupation_sol_content"
+                                class="accordion-collapse collapse show"
+                                aria-labelledby="occupation_sol"
+                              >
+                                <div class="accordion-body">
+                                  <div id="sub_themes" style="margin-left: 5%">
+                                    <ul class="list-unstyled" id="magr">
+                                      <div class="row">
+                                        <div class="d-flex align-items-center">
+                                          <!-- Bouton avec la flèche -->
+                                          <button
+                                            id="btn"
+                                            class="btn btn-link text-decoration-none caret-subtitle"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#subItemOne"
+                                            aria-expanded="false"
+                                            aria-controls="subItemOne"
+                                          >
+                                            <i
+                                              class="fa fa-caret-right me-2"
+                                              id="iconSubOne"
+                                            ></i>
+                                          </button>
+
+                                          <!-- Checkbox avec étiquette -->
+                                          <div class="form-check me-2">
+                                            <input
+                                              class="form-check-input"
+                                              type="checkbox"
+                                              value=""
+                                              id="selectAllCheckbox"
+                                              style="border-radius: 50%"
+                                              (change)="
+                                                toggleAllMangroves($event)
+                                              "
+                                            />
+                                            <label
+                                              class="form-check-label"
+                                              for="selectAllCheckbox"
+                                              style="font-size: 14px"
+                                            >
+                                              Mangroves
+                                            </label>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                      <li class="myli">
+                                        <div
+                                          id="subItemOne"
+                                          class="collapse show"
+                                        >
+                                          <!-- container classes -->
+                                          <div
+                                            *ngFor="let c of especes"
+                                            class="form-check d-flex align-items-center mb-2"
+                                            style="
+                                              position: relative;
+                                              bottom: 10px;
+                                              left: 10px;
+                                            "
+                                          >
+                                            <input
+                                              type="checkbox"
+                                              class="form-check-input"
+                                              value="{{ c.id }}"
+                                              style="border-radius: 50%"
+                                              [(ngModel)]="c.selected"
+                                              (change)="
+                                                onMangroveCheckChange(c)
+                                              "
+                                              [id]="'checkbox-' + c.id"
+                                            />
+                                            <span
+                                              [style.backgroundColor]="
+                                                c.code_couleur
+                                              "
+                                              style="
+                                                width: 20px;
+                                                height: 15px;
+                                                display: inline-block;
+                                                margin-left: 10px;
+                                                margin-top: 12px;
+                                                border: 1px solid #000;
+                                              "
+                                            ></span>
+                                            <label
+                                              [for]="'checkbox-' + c.id"
+                                              class=""
+                                              style="
+                                                font-size: 12px;
+                                                margin-top: 13px;
+                                                margin-left: 10px;
+                                              "
+                                            >
+                                              {{ c.libelle }}
+                                            </label>
+                                          </div>
+                                        </div>
+                                      </li>
+                                    </ul>
+                                    <ul class="list-unstyled" id="occ">
+                                      <div class="row">
+                                        <div class="d-flex align-items-center">
+                                          <!-- Bouton avec la flèche -->
+                                          <button
+                                            id="btn"
+                                            class="btn btn-link text-decoration-none caret-subtitle"
+                                            aria-expanded="true"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#subItemtwo"
+                                            aria-expanded="false"
+                                            aria-controls="subItemOne"
+                                          >
+                                            <i
+                                              class="fa fa-caret-right me-2"
+                                              id="iconSubOne"
+                                            ></i>
+                                          </button>
+
+                                          <!-- Checkbox avec étiquette -->
+                                          <div class="form-check me-2">
+                                            <input
+                                              class="form-check-input"
+                                              type="checkbox"
+                                              style="border-radius: 50%"
+                                              id="selectAllCheckboxs"
+                                              (change)="
+                                                toggleAllOccupations($event)
+                                              "
+                                            />
+                                            <label
+                                              class="form-check-label"
+                                              for="selectAllCheckboxs"
+                                              style="font-size: 14px"
+                                            >
+                                              Autres occupations du sol
+                                            </label>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <li class="myli">
+                                        <div
+                                          id="subItemtwo"
+                                          class="collapse"
+                                          style="
+                                            position: relative;
+                                            bottom: 10px;
+                                            left: 10px;
+                                          "
+                                        >
+                                          <!-- container classes -->
+                                          <div
+                                            *ngFor="let c of classe"
+                                            class="form-check d-flex align-items-center mb-2"
+                                          >
+                                            <input
+                                              type="checkbox"
+                                              value="{{ c.id }}"
+                                              class="form-check-input"
+                                              style="border-radius: 50%"
+                                              [(ngModel)]="c.selected"
+                                              (change)="
+                                                onOccupationCheckChange(c)
+                                              "
+                                              [id]="'Ocheckbox-' + c.id"
+                                            />
+                                            <span
+                                              [style.backgroundColor]="
+                                                c.code_couleur
+                                              "
+                                              style="
+                                                width: 20px;
+                                                height: 15px;
+                                                display: inline-block;
+                                                margin-left: 10px;
+                                                margin-top: 12px;
+                                                border: 1px solid #000;
+                                              "
+                                            ></span>
+                                            <label
+                                              [for]="'Ocheckbox-' + c.id"
+                                              class=""
+                                              style="
+                                                font-size: 12px;
+                                                margin-top: 13px;
+                                                margin-left: 10px;
+                                              "
+                                            >
+                                              {{ c.libelle }}
+                                            </label>
+                                          </div>
+                                        </div>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="accordion-item">
+                              <h2 class="accordion-header" id="occupation_sol">
+                                <button
+                                  class="accordion-button"
+                                  type="button"
+                                  data-bs-toggle="collapse"
+                                  data-bs-target="#alertes"
+                                  aria-expanded="true"
+                                  aria-controls="alertes"
+                                  id="bt"
+                                >
+                                  Alertes de pertubations
+                                </button>
+                              </h2>
+                              <div
+                                id="alertes"
+                                class="accordion-collapse collapse"
+                                aria-labelledby="occupation_sol"
+                              >
+                                <div class="accordion-body">
+                                  <div id="sub_themes" style="margin-left: 5%">
+                                    <div class="row">
+                                      <div
+                                        class="col-6"
+                                        style="margin-bottom: 10px"
+                                      >
+                                        <select
+                                          class="form-control"
+                                          [(ngModel)]="selectedYear"
+                                          (change)="onYearChange($event)"
+                                        >
+                                          <option
+                                            value=""
+                                            disabled
+                                            selected
+                                            style="font-size: 12px"
+                                          >
+                                            Filtre par date
+                                          </option>
+                                          <option
+                                            *ngFor="let annee of alertes"
+                                            [value]="annee.annee"
+                                          >
+                                            {{ annee.annee }}
+                                          </option>
+                                        </select>
+                                      </div>
+                                      <!-- Sélection du mois -->
+                                      <div class="col-6">
+                                        <select
+                                          class="form-control"
+                                          [(ngModel)]="selectedMonth"
+                                          (change)="onMonthChange($event)"
+                                        >
+                                          <option value="" selected>
+                                            Filtre par mois
+                                          </option>
+                                          <option
+                                            *ngFor="let mois of filteredMonths"
+                                            [value]="mois"
+                                          >
+                                            {{ mois }}
+                                          </option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                    <ul
+                                      class="list-unstyled"
+                                      style="margin-right: -100px"
+                                    >
+                                      <li *ngFor="let annee of filteredDates">
+                                        <div class="row">
+                                          <div
+                                            class="d-flex align-items-center"
+                                          >
+                                            <button
+                                              class="btn btn-link text-decoration-none"
+                                              type="button"
+                                              data-bs-toggle="collapse"
+                                              [attr.data-bs-target]="
+                                                '#subItemtrie-' + annee.annee
+                                              "
+                                              aria-expanded="false"
+                                              [attr.aria-controls]="
+                                                'subItemtrie-' + annee.annee
+                                              "
+                                            >
+                                              <i
+                                                class="fa fa-caret-right me-2"
+                                              ></i>
+                                            </button>
+                                            <div class="form-check me-2">
+                                              <input
+                                                class="form-check-input"
+                                                type="checkbox"
+                                                style="border-radius: 50%"
+                                                [value]="annee"
+                                                [id]="'alertes-' + annee.annee"
+                                                [checked]="
+                                                  selectedAnnees[annee.annee] ||
+                                                  false
+                                                "
+                                                (change)="
+                                                  onAlertesCheckChange(
+                                                    $event,
+                                                    annee,
+                                                    true
+                                                  )
+                                                "
+                                              />
+
+                                              <label
+                                                class="form-check-label"
+                                                [for]="'alertes-' + annee.annee"
+                                              >
+                                                Année {{ annee.annee }}
+                                              </label>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                        <!-- Liste des dates collapsable -->
+                                        <div
+                                          [id]="'subItemtrie-' + annee.annee"
+                                          class="check"
+                                        >
+                                          <div
+                                            *ngFor="
+                                              let date of annee.date
+                                                | paginate
+                                                  : {
+                                                      itemsPerPage: 5,
+                                                      currentPage: p
+                                                    }
+                                            "
+                                            class="form-check d-flex align-items-center mb-2"
+                                          >
+                                            <input
+                                              type="checkbox"
+                                              style="border-radius: 50%"
+                                              [value]="date"
+                                              class="form-check-input"
+                                              [id]="'Ocheckbox-' + date"
+                                              (change)="
+                                                onAlertesCheckChange(
+                                                  $event,
+                                                  date,
+                                                  false
+                                                )
+                                              "
+                                              [checked]="
+                                                selectedDates[date] || false
+                                              "
+                                            />
+
+                                            <label
+                                              [for]="'Ocheckbox-' + date"
+                                              style="
+                                                font-size: 13px;
+                                                margin-top: 13px;
+                                                margin-left: 10px;
+                                              "
+                                            >
+                                              {{ date | date : "dd MMMM" }}
+                                            </label>
+                                          </div>
+
+                                          <!-- Pagination -->
+                                          <div
+                                            style="position: relative"
+                                            class="pag"
+                                          >
+                                            <pagination-controls
+                                              (pageChange)="p = $event"
+                                              [autoHide]="true"
+                                              [maxSize]="5"
+                                              [previousLabel]="''"
+                                              [nextLabel]="''"
+                                              [screenReaderPaginationLabel]="
+                                                'Pagination controls'
+                                              "
+                                              [screenReaderPageLabel]="'page'"
+                                            >
+                                            </pagination-controls>
+                                          </div>
+                                        </div>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="accordion-item">
+                              <h2
+                                class="accordion-header"
+                                id="occupation_sol"
+                                disabled
+                              >
+                                <button
+                                  class="accordion-button"
+                                  type="button"
+                                  data-bs-toggle="collapse"
+                                  data-bs-target="#biomasse"
+                                  aria-expanded="true"
+                                  aria-controls="biomasse"
+                                  id="bt"
+                                  disabled
+                                >
+                                  Biomasse et carbone
+                                </button>
+                              </h2>
+                              <div
+                                id="biomasse"
+                                class="accordion-collapse collapse"
+                                aria-labelledby="occupation_sol"
+                              >
+                                <div class="accordion-body">
+                                  <div id="sub_themes" style="margin-left: 5%">
+                                    <ul class="list-unstyled">
+                                      <div class="row">
+                                        <div class="d-flex align-items-center">
+                                          <div class="form-check me-2">
+                                            <input
+                                              class="form-check-input"
+                                              type="checkbox"
+                                              value=""
+                                              id="mangroves"
+                                              style="border-radius: 50%"
+                                              disabled
+                                            />
+                                            <label
+                                              class="form-check-label"
+                                              for="mangroves"
+                                            >
+                                              Stockage de carbone
+                                            </label>
+                                          </div>
+                                          <br />
+                                        </div>
+                                      </div>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Affichage des graphes statistiques et statistiques de selection -->
+                        <div class="tab-pane" id="statistiques">
+                          <div *ngIf="globalStatActive">
+                            <h4
+                              class="text-center mt-3 mb-5 pb-2"
+                              style="font-size: 18px; border: 2px solid #275336"
+                            >
+                              Statistiques Generales
+                            </h4>
+                            <div class="row">
+                              <div class="col-sm-12 text-center">
+                                <label class="label label-success"
+                                  >Superficie totale des especes de mangrove par
+                                  de l'estuaire</label
+                                >
+                                <canvas id="sup-annee"></canvas>
+                              </div>
+                              <div class="col-sm-10 text-center">
+                                <label class="label label-success"
+                                  >Superficie par especes (en km²)</label
+                                >
+                                <canvas
+                                  id="chartEspeceAnnee"
+                                  height=""
+                                ></canvas>
+                              </div>
+                              <div class="col-sm-12 text-center">
+                                <label class="label label-success"
+                                  >Superficie des especes par
+                                  arrondissement</label
+                                >
+                                <canvas id="superficie-arrondissement"></canvas>
+                              </div>
+                              <div class="col-sm-10 text-center">
+                                <label class="label label-success"
+                                  >Superficie dans une province par année</label
+                                >
+                                <canvas id="SupProAnnee"></canvas>
+                              </div>
+                              <br /><br /><br />
+                              <hr />
+
+                              <h5 class="text-center">Alertes</h5>
+                              <br /><br />
+                              <div class="col-sm-10 text-center">
+                                <label class="label label-success"
+                                  >Nombre d'alertes par année</label
+                                >
+                                <canvas id="nbr_alerte"></canvas>
+                              </div>
+                            </div>
+                          </div>
+                          <div *ngIf="!globalStatActive">
+                            <div class="accordion" id="main_themes">
+                              <div class="accordion-item">
+                                <h4
+                                  class="text-center mt-3 mb-5 pb-2"
+                                  style="
+                                    font-size: 18px;
+                                    border: 2px solid #275336;
+                                  "
+                                >
+                                  Statistiques par zone
+                                </h4>
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <table
+                                      class="table table-bordered"
+                                      style="font-size: 11px"
+                                    >
+                                      <thead>
+                                        <tr></tr>
+                                        <tr>
+                                          <th>Espèces</th>
+                                          <th>Superficie (m²)</th>
+                                          <th>Hauteur (m)</th>
+                                        </tr>
+                                      </thead>
+
+                                      <tbody id="dynamique_especes">
+                                        <tr
+                                          *ngIf="
+                                            selectedMangrove &&
+                                              filteredMangroveData.length === 0;
+                                            else filteredTemplate
+                                          "
+                                        >
+                                          <td class="text-center">
+                                            {{ selectedMangrove.type }}
+                                          </td>
+                                          <td class="text-center">
+                                            {{
+                                              selectedMangrove.surface
+                                                | number : "1.5-5"
+                                            }}
+                                          </td>
+                                          <td class="text-center">
+                                            {{ selectedMangrove.hauteur }}
+                                          </td>
+                                        </tr>
+                                      </tbody>
+
+                                      <!-- Afficher la liste des mangroves filtrées | number: '1.5-5'  -->
+                                      <ng-template #filteredTemplate>
+                                        <tr
+                                          *ngFor="
+                                            let mangrove of filteredMangroveData
+                                          "
+                                        >
+                                          <td class="text-center">
+                                            {{ mangrove.type__libelle }}
+                                          </td>
+                                          <td class="text-center">
+                                            {{
+                                              mangrove.surface
+                                                | number : "1.5-5"
+                                            }}
+                                          </td>
+                                          <td class="text-center">
+                                            {{ mangrove.hauteur }}
+                                          </td>
+                                        </tr>
+                                        <tr
+                                          *ngIf="
+                                            filteredMangroveData.length === 0
+                                          "
+                                        >
+                                          <td colspan="3" class="text-center">
+                                            Aucune donnée disponible.
+                                          </td>
+                                        </tr>
+                                      </ng-template>
+                                    </table>
+                                    <table
+                                      class="table table-bordered"
+                                      style="font-size: 11px"
+                                    >
+                                      <thead>
+                                        <tr></tr>
+                                        <tr>
+                                          <th>Alerte N°</th>
+                                          <th>date</th>
+                                        </tr>
+                                      </thead>
+
+                                      <tbody id="dynamique_especes">
+                                        <tr
+                                          *ngIf="
+                                            filteredMangroveDatas.length === 0;
+                                            else filteredTemplates
+                                          "
+                                        >
+                                          <td class="text-center"></td>
+                                          <td class="text-center"></td>
+                                        </tr>
+                                      </tbody>
+
+                                      <!-- Afficher la liste des mangroves filtrées | number: '1.5-5'  -->
+                                      <ng-template #filteredTemplates>
+                                        <tr
+                                          *ngFor="
+                                            let mangrove of filteredMangroveDatas
+                                          "
+                                        >
+                                          <td class="text-center">
+                                            {{ mangrove.id }}
+                                          </td>
+                                          <td class="text-center">
+                                            {{ mangrove.dates }}
+                                          </td>
+                                        </tr>
+                                        <tr
+                                          *ngIf="
+                                            filteredMangroveDatas.length === 0
+                                          "
+                                        >
+                                          <td colspan="3" class="text-center">
+                                            Aucune donnée disponible.
+                                          </td>
+                                        </tr>
+                                      </ng-template>
+                                    </table>
+
+                                    <table
+                                      class="table table-bordered"
+                                      style="font-size: 11px"
+                                    >
+                                      <thead>
+                                        <tr>
+                                          <th class="text-center">
+                                            Stockage de carbone
+                                          </th>
+                                        </tr>
+                                      </thead>
+                                      <tbody id="area_typologie">
+                                        <tr>
+                                          <td
+                                            colspan="2"
+                                            id="departement"
+                                            class="text-center"
+                                          >
+                                            Aucune donnée disponible
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- button -->
+          <div class="col-md-8 pt-2" id="content">
+            <div class="card mb-1">
+              <div class="card-header">
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 text-center">
+                    <div
+                      class="btn-group btn-group-sm"
+                      role="group"
+                      aria-label="Basic example"
+                    >
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        title="Infos"
+                        [disabled]="statTabActive"
+                      >
+                        <span class="fas fa-info"></span>
+                        <!-- Classe Font Awesome -->
+                      </button>
+                      <button
+                        class="btn btn-primary"
+                        title="Recherche rapide"
+                        data-bs-toggle="modal"
+                        data-bs-target="#details_modal"
+                        [disabled]="statTabActive"
+                      >
+                        <span class="fas fa-search-location"></span>
+                        <!-- Classe Font Awesome -->
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-success"
+                        (click)="drawPolygon()"
+                        id="draw_poly"
+                        title="Polygone"
+                      >
+                        <span class="fas fa-draw-polygon"></span>
+                        <!-- Classe Font Awesome -->
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-warning"
+                        title="Position"
+                        [disabled]="statTabActive"
+                      >
+                        <span class="fas fa-location-dot"></span>
+                        <!-- Classe Font Awesome -->
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        title="Mesure de distance"
+                        (click)="MesureDistance()"
+                        [disabled]="statTabActive"
+                      >
+                        <span class="fas fa-ruler"></span>
+                        <!-- Classe Font Awesome -->
+                      </button>
+
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        (click)="removeMap()"
+                        title="Supprimer"
+                        [disabled]="statTabActive"
+                      >
+                        <span class="fas fa-trash"></span>
+                        <!-- Classe Font Awesome -->
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              id="map"
+              [ngClass]="{ hidden: isStatVisible }"
+              style="border: 2px solid green; height: 86vh"
+            >
+              <div *ngIf="loading" class="loading-indicator">
+                <div class="spinner-border text-danger" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12 hidden">
+              <table class="table table-bordered" style="font-size: 13px">
+                <thead>
+                  <tr>
+                    <th class="text-center" *ngFor="let c of classe">
+                      {{ c.libelle }}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody id="area_typologie">
+                  <tr>
+                    <td id="departement" class="text-center">174903 ha</td>
+                    <td id="departement" class="text-center">174903 ha</td>
+                    <td id="departement" class="text-center">174903 ha</td>
+                    <td id="departement" class="text-center">174903 ha</td>
+                    <td id="departement" class="text-center">174903 ha</td>
+                    <td id="departement" class="text-center">174903 ha</td>
+                    <td id="departement" class="text-center">174903 ha</td>
+                    <td id="departement" class="text-center">174903 ha</td>
+                    <td id="departement" class="text-center">174903 ha</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="pull-right">
+              <h5 style="color: #e60b0b; font-size: 10px" id="datej">
+                Date de dernière mise à jour :
+                {{ parametre.last_date | date : "dd/MM/yyyy" }}
+              </h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <app-footer></app-footer>
+    </div>
+    <br /><br /><br /><br />
+  </div>
+
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="details_modal"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+  >
+    <div class="modal-dialog modal-dialog modal-lg-5">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5
+            class="modal-title"
+            id="exampleModalLabel"
+            style="font-weight: bold"
+          >
+            Filtrer par
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <!-- Sélecteur pour la date -->
+            <div class="col-md-4">
+              <label for="date">Date:</label>
+
+              <select class="form-control" id="date" [(ngModel)]="selectedDate">
+                <option *ngFor="let date of dates" [value]="date">
+                  {{ date | date : "yyyy" }}
+                </option>
+              </select>
+            </div>
+
+            <!-- Sélecteur pour l'espèce -->
+            <div class="col-md-4">
+              <label for="espece">Espèce:</label>
+
+              <select
+                class="form-control"
+                id="espece"
+                [(ngModel)]="selectedEspece"
+              >
+                <option value="" selected>-//-</option>
+                <option *ngFor="let espece of especes" [value]="espece.id">
+                  {{ espece.libelle }}
+                </option>
+              </select>
+            </div>
+
+            <!-- Sélecteur pour la province -->
+            <div class="col-md-4">
+              <label for="province">Province:</label>
+
+              <select
+                class="form-control"
+                id="province"
+                [(ngModel)]="selectedProvince"
+              >
+                <option value="" selected>-//-</option>
+                <option
+                  *ngFor="let province of provinces"
+                  [value]="province.nom"
+                >
+                  {{ province.nom }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Fermer
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-dismiss="modal"
+            (click)="applyFilters()"
+          >
+            Appliquer les filtres
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

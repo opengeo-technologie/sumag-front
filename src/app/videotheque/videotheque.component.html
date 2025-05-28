@@ -1,0 +1,176 @@
+<div id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+    
+    <div id="container">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #2F4F4F;">
+            <div class="container-fluid">
+              <!-- <a class="navbar-brand" href="#"> <h1 class="text-white"> SUMAG</h1> </a> -->
+              <a href="#" title="Retour à l'accueil">
+                <img src="assets/icones/p.png" style="height: 60px;" alt="Logo SUMAG">
+              </a>
+              
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" ></span>
+              </button>
+      
+              <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  
+                </ul>
+                <span class="navbar-text" style="position: relative; top: 3px;">
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                      <a class="nav-link text-white underline-linkk" href="#" routerLink="/map"><span class="fa fa-map"></span> Cartographie des mangroves</a>
+                  </li>
+                    <li class="nav-item">
+                      <a class="nav-link text-white underline-linkk" href="#" routerLink="/Apropos"><span class="fa fa-comment"></span> A Propos</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link text-white underline-linkk" ><span class="fa fa-users"></span> Communauté</a>
+                  </li>
+                  
+                  <li class="nav-item">
+                      <a class="nav-link text-white underline-linkk" href="/admin"><span class="fa fa-lock"></span> Mon Compte</a>
+                  </li>
+                  </ul>
+                </span>
+              </div>
+            </div>
+          </nav>
+        <header>
+            <div class="row">
+                <div class="row" id="header1">
+                    <div class="col-md-3">
+                      <a routerLink="/" style="text-decoration: none;">  <h3>Documentation</h3></a>
+                    </div>
+                    <div class="col-md-6"></div>
+                    <div class="col-md-3 logo_sco">
+                        <img src="assets/partenaires/sco_sf.png" alt="Logo SCO Gabon">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 top_menu">
+                    <h4><a routerLink="/documentation" >Bibliothèque</a></h4>
+                </div>
+                <div class="col-md-6 top_menu" style="opacity: 0.7;">
+                    <h4><a >Vidéothèque</a></h4>
+                </div>
+            </div>
+        </header>
+
+        <div id="body">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-3" style="opacity: 0.7;">
+                    <span class="glyph-icon icon-linecons-search"></span>
+                    <span style="font-size: 12px">Rechercher dans les vidéos</span>
+                </div>
+                <div class="col-md-3" style="opacity: 0.7;">
+                    <input type="text" [(ngModel)]="searchTerm" (input)="filterArchives()" id="search-content" placeholder="Expression ou mot clé" class="form-control">
+                </div>
+                <div class="col-md-2" style="padding-left: 2%;">
+                    <button class="btn btn-outline-primary btn-sm" (click)="filterArchives()">Rechercher</button>
+                </div>
+            </div>
+            
+            </div>
+
+            <hr style="border: 3px solid rgb(17, 93, 207); opacity: 0.8;">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5" id="video-a-la-une" *ngIf="videoALaUne" >
+                        <h2 class="text-center">Vidéo à la une</h2>
+                        <hr style="border: 1px solid rgb(17, 93, 207); opacity: 0.8;">
+                        <div class="embed-responsive embed-responsive-21by9">
+                         <iframe width="100%" height="315" [src]="videoALaUne.lien  | safeUrl" allowfullscreen></iframe>  
+                        </div>
+                        <div>
+                            <h4  style="font-family: 'Comic Sans MS';font-weight: bold">{{videoALaUne.titre | capitalizeFirst  }} </h4><br>
+                            <div class="embed-responsive embed-responsive-21by9" style="font-size: 20px;" [innerHTML]="videoContent"></div>
+                            <div>
+                              <button (click)="sharePage()">
+                                  <i class="fas fa-share-alt"></i> Partager
+                              </button>
+                            </div>
+                          
+                          
+                        </div>
+
+                    </div> 
+                    <!-- <div class="col-md-5" id="video-a-la-une">
+                        <h2 class="text-center">Vidéo à la une</h2>
+                        <hr style="border: 1px solid rgb(17, 93, 207); opacity: 0.8;">
+                        <div class="embed-responsive embed-responsive-21by9">
+                            <iframe width="100%" height="315" class="embed-responsive-item" src="https://www.youtube.com/embed/6GIVoOSJGLI" allowfullscreen></iframe>
+                        </div>
+                        <div>
+                            <h5>La mangrove, un trésor de biodiversité à préserver</h5>
+                            <p>La mangrove n’est pas un dépotoir!</p>
+                            <p>
+                                Extraordinaires réservoirs de biodiversité, aussi bien en termes de reproduction,
+                                d’alimentation que de repos pour les espèces résidentes ou migratrices, les mangroves
+                                remplissent de multiples fonctions leur conférant des valeurs biologiques,
+                                hydrologiques, économiques et sociologiques remarquables. Mais malgré cette richesse,
+                                ces milieux naturels sont aujourd’hui menacés par l’industrialisation, l’urbanisation,
+                                l’agriculture ou encore les activités minières, entraînant leur dégradation et leur
+                                destruction.
+                            </p>
+                            <p>
+                                Chacun peut contribuer à agir pour mieux la protéger, à commencer par éviter d’y
+                                déposer ses déchets ménagers ou industriels…. on compte sur vous!
+                            </p>
+                            <p>
+                                Vidéo du Pôle-relais zones humides tropicales, co-animé par le Comité français
+                                de l’UICN et le Conservatoire du Littoral.
+                            </p>
+                            <p>Réalisation: Tarkka Media</p>
+                            <p>Musique: bensound.com</p>
+                        </div>
+                    </div> -->
+                    <div class="col-md-1"></div>
+                    <div class="col-md-6" id="archives-videos">
+                        <h2 class="text-center" style="color: rgb(6, 129, 12);font-weight: bolder;  ">Archives</h2>
+                        <hr style="border: 1px solid rgb(17, 93, 207); opacity: 0.8;">
+                        
+                        <div *ngFor="let group of groupedArchives" class="row" >
+                            <div class="col-md-3 mb-4 xs-2" *ngFor="let archive of group" (click)="selectVideo($event, archive)" style="margin-left: 20px;">
+                              <div class="thumbnail t">
+                                <!-- Afficher la miniature de la vidéo -->
+                                <img *ngIf="archive.lien" [src]="'https://img.youtube.com/vi/' + extractYouTubeId(archive.lien) + '/0.jpg'" alt="Thumbnail" width="150" height="150">
+                              </div>
+                              <h6 style="font-family: 'Comic Sans MS'" >{{ archive.titre | capitalizeFirst}}</h6>
+                            </div>
+                            <hr style="border: 1px solid rgb(17, 93, 207); opacity: 0.8;">
+                        </div>
+                        
+                          
+
+                        
+                        <!-- Pagination (si nécessaire) -->
+                        <div class="row pt-3">
+                          <nav aria-label="Page navigation example text-center">
+                            <ul class="pagination pagination-sm" style="display: flex;justify-content: center;">
+                              <li class="page-item" [class.disabled]="currentPage === 1">
+                                <button class="page-link" (click)="PreviousPage()">Précédent</button>
+                              </li>
+                              <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="i + 1 === currentPage">
+                                <button class="page-link" (click)="currentPage = i + 1">{{ i + 1 }}</button>
+                              </li>
+                              <li class="page-item" [class.disabled]="currentPage === totalPages">
+                                <button class="page-link" (click)="NextPage()">Suivant</button>
+                              </li>
+                            </ul>
+                          </nav>
+                          
+                        </div>
+                    </div>
+                      
+                </div>
+            </div>
+        </div><br><br><br><br><br>
+
+        <app-footer></app-footer>
+    </div>
+</div>

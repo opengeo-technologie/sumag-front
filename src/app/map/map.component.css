@@ -1,0 +1,243 @@
+:host {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Cooper Black Regular";
+  /* font-family: 'Comic Sans MS'; */
+}
+
+.hidden {
+  display: none;
+}
+
+.caret-subtitle {
+  position: relative;
+  left: 25px;
+  top: 4px;
+  color: black;
+  padding-right: 0px;
+}
+
+.form-check-label {
+  margin-left: 5px;
+  margin-top: 13px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.form-check-input {
+  margin-left: 2px;
+  margin-top: 15px;
+}
+
+.myli {
+  margin-top: 8px;
+  margin-left: 40px;
+}
+
+/* Style pour aligner les éléments sur la même ligne */
+.d-flex {
+  display: flex;
+  align-items: center;
+}
+
+/* Ajout d'un espace entre les éléments */
+.me-2 {
+  margin-right: 10px;
+}
+
+.form-check-input:checked {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.form-check-input:checked::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 10px;
+  height: 10px;
+  background-color: white; /* Couleur du "check" interne */
+  border-radius: 50%;
+}
+
+#subItemtwo {
+  /* margin-left: 25px; */
+  /* margin-top: 10px; */
+  font-size: 13px;
+  font-weight: bold;
+}
+
+#subItemOne {
+  /* margin-left: 25px;
+    margin-top: 10px; */
+  font-size: 13px;
+  font-weight: bold;
+}
+
+#bt {
+  font-weight: bold;
+  font-size: 18px;
+}
+#area-chart,
+#line-chart,
+#bar-chart,
+#stacked,
+#pie-chart {
+  min-height: 250px;
+}
+
+:host {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  /* font-family: ''; */
+}
+
+#sat {
+  position: relative;
+  right: 5%;
+  bottom: 10%;
+}
+
+pagination-controls {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  margin-left: -120px !important;
+}
+
+.pagination-active {
+  background-color: #007bff;
+  color: white;
+}
+
+.pagination-page {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.pagination-page:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.underline-linkk {
+  text-decoration: none; /* Supprime les soulignements par défaut */
+  position: relative;
+}
+
+.underline-linkk::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: white; /* Couleur du soulignement */
+  bottom: 0;
+  left: 0;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+  /* transform: scaleX(1); Toujours visible */
+}
+.underline-linkk:hover::after {
+  transform: scaleX(1); /* Animation au survol */
+}
+.pag {
+  font-size: 12px;
+  position: relative;
+  right: 80px;
+}
+
+.check {
+  position: relative;
+  left: 70px;
+}
+
+#occupation_sol_content {
+  margin-left: -50px;
+}
+
+#alertes {
+  margin-left: -20px;
+}
+
+#alertes .form-check {
+  margin-left: -30px;
+}
+
+.accordion-button {
+  font-size: 16px !important;
+}
+
+.accordion-button:disabled {
+  background-color: rgb(213, 201, 201);
+  color: #f1f1f1;
+}
+
+@media screen and (max-width: 576px) {
+  #map {
+    margin-bottom: 55px;
+  }
+}
+
+#table-stat {
+  overflow: auto;
+}
+.legend-btn {
+  display: none;
+}
+
+#content {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+#right_menu .nav-fill {
+  padding-right: 0px;
+}
+
+#right_menu .nav .nav-link {
+  color: #275336;
+  background-color: #ffffff;
+  margin: auto;
+}
+
+#right_menu .nav .active {
+  color: #ffffff;
+  background-color: #275336;
+  margin: auto;
+}
+
+/* Cacher la legende pour les petits ecrans (max width 768px) */
+@media screen and (min-width: 767px) and (max-width: 979px) {
+  /* #right_menu {
+    display: none;
+  } */
+
+  #right_menu h4 {
+    font-size: 18px;
+  }
+
+  #right_menu h2 button {
+    font-size: 16px;
+  }
+
+  #right_menu label {
+    font-size: 14px;
+  }
+
+  #occupation_sol_content {
+    margin-left: -60px;
+  }
+
+  .myli {
+    /* margin-top: 8px; */
+    margin-left: 50px;
+  }
+
+  .legend-btn {
+    display: block;
+  }
+}

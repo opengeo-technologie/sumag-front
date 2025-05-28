@@ -1,0 +1,458 @@
+<div id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+  <div id="container">
+    <nav
+      class="navbar navbar-expand-lg bg-body-tertiary"
+      style="background-color: #2f4f4f"
+    >
+      <div class="container-fluid">
+        <!-- <a class="navbar-brand" href="#"> <h1 class="text-white"> SUMAG</h1> </a> -->
+        <a href="#" title="Retour à l'accueil">
+          <img
+            src="assets/icones/p.png"
+            style="height: 60px"
+            alt="Logo SUMAG"
+          />
+        </a>
+        <!-- <a class="mb-0" id="top_titles" style="text-decoration: none;padding-top: 0px;padding-bottom: 0px; margin-top: 0px;margin-bottom: 0px; position: relative;font-size: 20x;" href="#" routerLink="/">SUMAG</a>
+          <img src="assets/icones/Satellite.png" style="height: 35px;" alt="Logo SUMAG" id="moi"> -->
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarText"
+          aria-controls="navbarText"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+          <span class="navbar-text" style="position: relative; top: 3px">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a
+                  class="nav-link text-white underline-linkk"
+                  href="#"
+                  routerLink="/map"
+                  ><span class="fa fa-map"></span> Cartographie des mangroves</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link text-white underline-linkk"
+                  href="#"
+                  routerLink="/Apropos"
+                  ><span class="fa fa-comment"></span> A Propos</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white underline-linkk"
+                  ><span class="fa fa-users"></span> Communauté</a
+                >
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link text-white underline-linkk" href="/admin"
+                  ><span class="fa fa-lock"></span> Mon Compte</a
+                >
+              </li>
+            </ul>
+          </span>
+        </div>
+      </div>
+    </nav>
+    <header>
+      <div class="row">
+        <div class="row" id="header1">
+          <div class="col-md-3">
+            <a routerLink="/" style="text-decoration: none">
+              <h3>Ressources</h3></a
+            >
+          </div>
+          <div class="col-md-6"></div>
+          <div class="col-md-3 logo_sco">
+            <img src="assets/partenaires/sco_sf.png" alt="Logo SCO Gabon" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 top_menu" style="opacity: 0.7">
+          <h4><a>Bibliothèque</a></h4>
+        </div>
+        <div class="col-md-6 top_menu">
+          <h4><a routerLink="/videotheque">Vidéothèque</a></h4>
+        </div>
+      </div>
+    </header>
+
+    <div id="body">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3" style="opacity: 0.7">
+            <span class="glyph-icon icon-linecons-search"></span>
+            <span style="font-size: 12px">
+              Rechercher dans les
+              <span id="count_documents">{{ publications.length }}</span>
+              documents
+            </span>
+          </div>
+          <div class="col-md-3" style="opacity: 0.7">
+            <input
+              type="text"
+              name="search_content"
+              id="search_content"
+              placeholder="Expression ou mot clé"
+              [(ngModel)]="searchTerm"
+              (input)="filterPublications()"
+            />
+          </div>
+          <div class="col-md-2" style="padding-left: 2%">
+            <button
+              class="btn btn-outline-primary btn-sm"
+              (click)="filterPublications()"
+            >
+              Rechercher
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <hr style="border: 3px solid rgb(17, 93, 207); opacity: 0.8" />
+      <div class="row" *ngIf="isLoading" style="height: 100px">
+        <div class="col-md-12">
+          <div class="loader" id="loader-5">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid" id="revues_docmentaires" *ngIf="!isLoading">
+        <div id="carouselExample" class="carousel slide">
+          <div class="carousel-inner">
+            <div
+              *ngFor="let type of groupedPublications | keyvalue; let i = index"
+              class="carousel-item"
+              [class.active]="i === 0"
+            >
+              <h2
+                class="text-center"
+                style="
+                  color: rgb(7, 243, 18);
+                  font-weight: bolder;
+                  padding-top: 20px;
+                "
+              >
+                {{ type.key }}
+              </h2>
+
+              <div class="container">
+                <div class="row justify-content-center" id="list_publications">
+                  <!-- Colonnes vides à gauche -->
+                  <!-- <div class="col-md-1"></div> -->
+
+                  <!-- Affichage dynamique des publications par ligne -->
+                  <div class="col-md-12">
+                    <div class="row">
+                      <!-- Publication 1 -->
+                      <div
+                        class="col-md-2 pt-2"
+                        *ngFor="
+                          let publication of getPaginatedPublications(type.key)
+                        "
+                      >
+                        <div class="card" style="width: 100%; margin: 0 auto">
+                          <div class="card-body">
+                            <img
+                              src="assets/pdf.png"
+                              alt=""
+                              style="width: 50%; display: block; margin: auto"
+                              class="mb-4"
+                            />
+                            <hr
+                              style="
+                                border: 2px solid rgb(20, 20, 21);
+                                opacity: 0.8;
+                              "
+                            />
+                            <h5 class="card-title custom-font">
+                              {{ publication.date | date : "d MMMM yyyy" }}
+                            </h5>
+                            <h6
+                              class="card-title custom-font"
+                              style="color: green; font-weight: bold"
+                            >
+                              {{
+                                publication.titre
+                                  | truncate : 15
+                                  | capitalizeFirst
+                              }}
+                            </h6>
+                            <p class="card-text custom-font">
+                              {{
+                                publication.resume
+                                  | truncate : 30
+                                  | capitalizeFirst
+                              }}
+                            </p>
+                            <a
+                              href="#"
+                              class="btn btn-outline-secondary btn-sm text-center"
+                              data-bs-toggle="modal"
+                              data-bs-target="#details_modal"
+                              (click)="openModal(publication)"
+                              style="
+                                color: #2f4f4f;
+                                display: block;
+                                margin: auto;
+                              "
+                            >
+                              Lire la suite
+                            </a>
+                          </div>
+                          <span class="custom-tooltip">{{
+                            publication.titre | capitalizeFirst
+                          }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Colonnes vides à droite -->
+                  <!-- <div class="col-md-1"></div> -->
+                </div>
+              </div>
+              <br />
+
+              <!-- Pagination pour chaque type -->
+              <nav aria-label="Page navigation example" class="mt-3">
+                <ul class="pagination pagination-sm justify-content-center">
+                  <li
+                    class="page-item"
+                    [class.disabled]="currentPageByType[type.key] === 1"
+                  >
+                    <a
+                      class="page-link"
+                      href="javascript:void(0)"
+                      (click)="previousPage(type.key)"
+                      >Précédent</a
+                    >
+                  </li>
+                  <li class="page-item">
+                    <span class="page-link"
+                      >{{ currentPageByType[type.key] }} /
+                      {{ totalPagesForType(type.key) }}</span
+                    >
+                  </li>
+                  <li
+                    class="page-item"
+                    [class.disabled]="
+                      currentPageByType[type.key] ===
+                      totalPagesForType(type.key)
+                    "
+                  >
+                    <a
+                      class="page-link"
+                      href="javascript:void(0)"
+                      (click)="nextPage(type.key)"
+                      >Suivant</a
+                    >
+                  </li>
+                </ul>
+              </nav>
+              <!-- Pagination -->
+            </div>
+          </div>
+
+          <!-- Boutons de navigation du carousel -->
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExample"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Précédent</span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExample"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Suivant</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <br /><br /><br /><br />
+
+    <app-footer></app-footer>
+  </div>
+</div>
+
+<a href="#" class="tooltip-container">
+  Hover me
+  <span class="custom-tooltip">This is a custom tooltip</span>
+</a>
+
+<!-- Modal -->
+<div
+  class="modal fade lg-12"
+  id="details_modal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5
+          class="modal-title text-center"
+          id="exampleModalLabel"
+          style="font-weight: bold"
+        >
+          Détails
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body" style="border: 5px solid #2f4f4f">
+        <table class="table">
+          <tr *ngIf="selectedPublication?.titre">
+            <td class="data-attribute">Auteur:</td>
+            <td id="title_pub">
+              {{ selectedPublication.auteur | capitalizeFirst }}
+            </td>
+          </tr>
+          <br />
+          <tr *ngIf="selectedPublication?.titre">
+            <td class="data-attribute">Titre:</td>
+            <td id="title_pub">
+              {{ selectedPublication.titre | capitalizeFirst }}
+            </td>
+          </tr>
+          <br />
+          <tr *ngIf="selectedPublication?.nom">
+            <td class="data-attribute">Nom de la revue:</td>
+            <td id="revue_nom">
+              {{ selectedPublication.nom | capitalizeFirst }}
+            </td>
+          </tr>
+          <br />
+          <tr *ngIf="selectedPublication?.mot_clef">
+            <td class="data-attribute">Mots clés:</td>
+            <td id="keywords">{{ selectedPublication.mot_clef }}</td>
+          </tr>
+          <tr *ngIf="selectedPublication?.reference">
+            <td class="data-attribute">Références:</td>
+            <td id="references">{{ selectedPublication.reference }}</td>
+          </tr>
+          <br />
+          <tr *ngIf="selectedPublication?.resume">
+            <td class="data-attribute">Resumé:</td>
+            <td id="resume_pub" style="text-align: justify">
+              {{
+                selectedPublication.resume | capitalizeFirst | truncate : 1000
+              }}
+            </td>
+          </tr>
+          <tr>
+            <td class="data-attribute">Date de publication:</td>
+            <td id="date_pub" class="text-center">
+              {{ selectedPublication?.date | date : "d MMMM yyyy" }}
+            </td>
+          </tr>
+          <br />
+        </table>
+        <div class="row">
+          <!-- <h6 class="text-center" *ngIf="selectedPublication?.fichier && selectedPublication.titre">
+                    <button class="btn btn-primary" (click)="downloadFile(selectedPublication?.fichier, selectedPublication?.titre)">Télécharger le fichier  <span class="fas fa-download"></span></button>
+                </h6> -->
+          <h6 class="text-center">
+            <!-- Si un lien est présent, afficher "Consulter le lien" -->
+            <ng-container
+              *ngIf="
+                selectedPublication?.lien && !selectedPublication?.is_downloaded
+              "
+            >
+              <a
+                class="btn btn-dark"
+                [href]="selectedPublication?.lien"
+                target="_blank"
+              >
+                Accéder à la publication
+                <span class="fas fa-external-link-alt"></span>
+              </a>
+            </ng-container>
+
+            <!-- Si un fichier est présent, afficher "Télécharger l'image" -->
+            <ng-container
+              *ngIf="
+                !selectedPublication?.lien &&
+                selectedPublication?.fichier &&
+                selectedPublication?.is_downloaded
+              "
+            >
+              <button
+                class="btn"
+                style="background-color: #2f4f4f; color: #ffffff"
+                (click)="
+                  downloadFile(
+                    selectedPublication?.fichier,
+                    selectedPublication?.titre
+                  )
+                "
+              >
+                Télécharger le document <span class="fas fa-download"></span>
+              </button>
+            </ng-container>
+
+            <!-- Si le lien n'existe pas et telechargement desactive, afficher "Envoyer une demande de document" -->
+            <ng-container
+              *ngIf="
+                !selectedPublication?.lien &&
+                !selectedPublication?.is_downloaded
+              "
+            >
+              <a
+                class="btn btn-info"
+                [href]="selectedPublication?.lien"
+                target="_blank"
+              >
+                Envoyer une demande <span class="fas fa-send"></span>
+              </a>
+            </ng-container>
+          </h6>
+
+          <!-- <h5 class="text-center">Voir le fichier PDF:</h5> -->
+          <!-- <iframe [src]="selectedPublication?.fichier | safeUrl" width="100%" height="600px" style="border: none;"></iframe> -->
+          <!-- <embed src="https://www.codeur.com/tuto/wp-content/uploads/2022/02/pdf-test.pdf" type="application/pdf"height="600px"> -->
+          <!-- <embed
+            *ngIf="!selectedPublication?.lien"
+            [src]="selectedPublication?.fichier | safeUrl"
+            type="application/pdf"
+            height="600px"
+          /> -->
+        </div>
+      </div>
+      <div class="modal-footer" style="border: 5px solid #2f4f4f">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+          Fermer <span class="fas fa-close"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

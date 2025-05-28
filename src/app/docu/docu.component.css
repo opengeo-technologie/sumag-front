@@ -1,0 +1,231 @@
+/* styles.css ou styles du composant */
+.text-color {
+  color: #0ca3df;
+}
+
+.text-size {
+  font-size: 0.1rem;
+}
+
+:host {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Cooper Black Regular";
+  /* font-family: 'Comic Sans MS'; */
+}
+
+.custom-font {
+  font-weight: 400;
+  font-size: 0.9rem;
+  font-family: "Comic Sans MS";
+  /* font-weight: bold;  */
+}
+.card-link {
+  text-decoration: none;
+  color: #3e13b4;
+  transition: color 0.3s ease;
+}
+
+.card .card-body .btn:hover {
+  color: #ffffff !important;
+}
+
+table {
+  width: 100%; /* Pour que le tableau occupe toute la largeur */
+  border-collapse: collapse; /* Pour éviter les doublons de bordures */
+}
+th,
+td {
+  border: 1px solid #000; /* Définit la bordure pour les cellules */
+  padding: 8px; /* Ajoute un peu d'espace intérieur */
+  text-align: left; /* Alignement du texte à gauche */
+}
+th {
+  background-color: #f2f2f2; /* Couleur d'arrière-plan pour les en-têtes */
+}
+
+table tr .data-attribute {
+  font-weight: bold;
+  background-color: #2f4f4f;
+  color: #ffffff;
+}
+
+/* #details_modal .modal-dialog {
+    max-width: 40rem;
+} */
+
+.underline-linkk {
+  text-decoration: none; /* Supprime les soulignements par défaut */
+  position: relative;
+}
+
+.underline-linkk::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: white; /* Couleur du soulignement */
+  bottom: 0;
+  left: 0;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+  /* transform: scaleX(1); Toujours visible */
+}
+.underline-linkk:hover::after {
+  transform: scaleX(1); /* Animation au survol */
+}
+
+/* .modal .modal-dialog {
+  width: 400px;
+  margin: 50px auto 0;
+} */
+
+.modal .modal-header {
+  background-color: #2f4f4f;
+  color: #ffffff;
+}
+
+.modal-header .btn-close {
+  color: #ffffff !important;
+}
+
+@media screen and (max-width: 576px) {
+  #revues_docmentaires {
+    margin-bottom: 75px;
+  }
+}
+
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.card .custom-tooltip {
+  visibility: hidden;
+  background-color: rgb(17, 16, 16, 0.8);
+  color: #fff;
+  width: 250px;
+  height: auto;
+  text-align: center;
+  border-radius: 4px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 60%; /* Position above the anchor */
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  /* white-space: nowrap; */
+}
+
+.card:hover .custom-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+:root {
+  --base: #263238;
+  --lite: #fff;
+  --brand: #ff3d00;
+  --size: 48px;
+}
+
+/* LOADER 5 */
+
+#loader-5 span {
+  display: block;
+  position: absolute;
+  left: calc(50% - 20px);
+  /* top: calc(50% - 10px); */
+  width: 20px;
+  height: 20px;
+  background-color: #3498db;
+}
+
+#loader-5 span:nth-child(2) {
+  animation: moveanimation1 1s ease-in-out infinite;
+}
+
+#loader-5 span:nth-child(3) {
+  animation: moveanimation2 1s ease-in-out infinite;
+}
+
+#loader-5 span:nth-child(4) {
+  animation: moveanimation3 1s ease-in-out infinite;
+}
+
+@keyframes moveanimation1 {
+  0%,
+  100% {
+    -webkit-transform: translateX(0px);
+    -ms-transform: translateX(0px);
+    -o-transform: translateX(0px);
+    transform: translateX(0px);
+  }
+
+  75% {
+    -webkit-transform: translateX(30px);
+    -ms-transform: translateX(30px);
+    -o-transform: translateX(30px);
+    transform: translateX(30px);
+  }
+}
+
+@keyframes moveanimation2 {
+  0%,
+  100% {
+    -webkit-transform: translateY(0px);
+    -ms-transform: translateY(0px);
+    -o-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+
+  75% {
+    -webkit-transform: translateY(30px);
+    -ms-transform: translateY(30px);
+    -o-transform: translateY(30px);
+    transform: translateY(30px);
+  }
+}
+
+@keyframes moveanimation3 {
+  0%,
+  100% {
+    -webkit-transform: translate(0px, 0px);
+    -ms-transform: translate(0px, 0px);
+    -o-transform: translate(0px, 0px);
+    transform: translate(0px, 0px);
+  }
+
+  75% {
+    -webkit-transform: translate(30px, 30px);
+    -ms-transform: translate(30px, 30px);
+    -o-transform: translate(30px, 30px);
+    transform: translate(30px, 30px);
+  }
+}
+
+/* .loader-32 {
+  width: var(--size);
+  height: var(--size);
+  border: 4px solid;
+  background: rgba(var(--lite), 0.2);
+  border-color: transparent var(--lite) var(--lite) transparent;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  animation: rotation 1s ease-in-out infinite;
+  &:after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border: var(--size) / 4 solid;
+    border-color: transparent var(--brand) var(--brand) transparent;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+  }
+} */

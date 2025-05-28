@@ -1,0 +1,537 @@
+.navbar-text {
+  position: relative;
+  top: 15px;
+}
+.leaflet-draw-toolbar {
+  display: none !important;
+}
+.loading-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  z-index: 1000;
+}
+#ac::after {
+  display: none !important;
+}
+
+@font-face {
+  font-family: "Cooper Black Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Cooper Black Regular"), url("fonts/COOPBL.woff") format("woff");
+}
+
+html,
+:host {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Cooper Black Regular";
+}
+
+.font-family {
+  font-family: "Times New Roman", Times, serif;
+}
+
+#container {
+  min-height: 100%;
+  position: relative;
+}
+
+#body {
+  padding-top: 10px;
+  padding-bottom: 60px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+#sumag_title {
+  margin-top: 1%;
+  /* height: 7%; */
+  background-color: rgba(39, 38, 38, 0.466);
+  justify-content: space-between;
+  /* background-image: url("nav_images/carte.jpg"); */
+  padding-bottom: 0px;
+  padding-top: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  min-height: 50px;
+}
+
+#sumag_title img {
+  height: 35px;
+}
+
+.navbar-nav .nav-link {
+  padding: 5px 10px;
+}
+
+#sumag_description {
+  height: 10%;
+}
+
+#menu-bars {
+  font-size: 60px;
+}
+
+#menu-bars a {
+  color: #000000;
+}
+
+#menu-bars a:hover {
+  color: #ffffff;
+}
+
+#dropdownList {
+  width: 400px;
+  margin-top: 50%;
+}
+
+#dropdownList a:hover {
+  color: #ffffff;
+  background-color: #228b22;
+}
+
+#top_title {
+  margin-top: 5%;
+  margin-left: 5px;
+  /* padding-left: 20%; */
+  padding-right: -5%;
+  background-color: #ffffff;
+  position: relative;
+  top: 10px;
+  border-radius: 20px;
+  font-size: 45px;
+  font-weight: bolder;
+  color: darkgreen;
+  /* color: white; */
+}
+
+#moi {
+  position: relative;
+  bottom: 80px;
+  left: 85px;
+}
+#sub_top_title {
+  margin-top: 7%;
+  background-color: #ffffff;
+  border-radius: 25px;
+  font-size: 25px;
+  font-weight: bolder;
+  color: darkgreen;
+}
+
+#modules {
+  margin-top: 5%;
+  align-items: center;
+  height: 30%;
+}
+
+#modules a {
+  text-decoration: none;
+}
+
+#modules .module-title {
+  margin-top: 2%;
+  padding-bottom: 1%;
+  font-size: 25px;
+  background-color: rgba(31, 41, 31, 0.8);
+  border-radius: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#modules .module-icon {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 20%;
+}
+
+.desciption {
+  margin-top: 4%;
+  padding-top: 1%;
+  /* background-color: rgb(228, 224, 224, 0.5); */
+  background-color: rgba(253, 249, 249, 0.5);
+  text-align: center;
+  /* color: rgb(8, 53, 8); */
+  color: rgb(0, 2, 0);
+  font-weight: bold;
+  /* font-size: 20px; */
+  /* font-size: 18px; */
+}
+
+#tout_partenaires {
+  align-items: center;
+  /* margin-left: 13%; */
+  width: 75%;
+  height: 86px;
+  /* top: 70px; */
+  padding: 2px;
+  /* background-color: transparent; */
+  background-color: rgba(39, 38, 38, 0.466);
+  position: relative;
+  /* right: 1%; */
+}
+
+.partenaires {
+  margin-top: 4%;
+  background-color: #ffffff;
+  width: 30%;
+  /* border: 2px solid black; */
+}
+
+.partenaires1 {
+  margin-top: 4%;
+  background-color: #ffffff;
+  width: 9%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.partenaires .img1 {
+  width: 10%;
+}
+
+.partenaires .img2 {
+  width: 15%;
+}
+
+.partenaires .img3 {
+  width: 15%;
+}
+
+.partenaires .img4 {
+  width: 15%;
+}
+
+.partenaires .img5 {
+  width: 25%;
+}
+
+.partenaires1 .img6 {
+  max-width: 100%;
+  max-height: 80%;
+}
+
+footer {
+  position: absolute;
+  /* padding: 10px 10px 0px 10px; */
+  bottom: 0;
+  width: 100%;
+  /* Height of the footer*/
+  /* height: 50px; */
+  /* background: grey; */
+  z-index: 99999;
+}
+
+footer .footer-icon {
+  color: #f0fff0;
+  align-items: center;
+  text-align: center;
+  margin-top: 2%;
+  margin-right: -5px;
+  padding-right: 0;
+}
+
+footer .footer-icon span {
+  background-color: #daa520;
+  padding: 10% 10% 10% 10%;
+  border-radius: 50px;
+  font-size: 30px;
+}
+
+footer .footer-text {
+  color: #f0fff0;
+  margin-top: 2%;
+}
+
+footer .footer-text h6 {
+  margin-bottom: 0;
+}
+
+/* Pages CSS */
+
+#header1 {
+  background-image: url("nav_images/recherche_donnees.jpg");
+  background-size: cover;
+  /* width: 100%; */
+  height: 90px;
+  /* border: 2px solid black; */
+}
+
+#header1 h3 {
+  color: #ffffff;
+  padding-top: 3%;
+  padding-left: 10%;
+}
+
+#header1 .logo_sco {
+  padding-top: 1%;
+}
+
+#header1 .logo_sco img {
+  float: right;
+  margin-right: 0;
+  width: 20%;
+}
+
+.top_menu {
+  /* margin-left: 0;
+  margin-right: 0; */
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.top_menu h4 {
+  background-color: #2f4f4f;
+  text-align: center;
+  color: #ffffff;
+  border-radius: 5px;
+  padding-bottom: 1%;
+  padding-top: 1%;
+  border: 2px solid rgb(6, 129, 12);
+}
+
+.top_menu h4 a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.top_menu h4 a:hover {
+  text-decoration: underline;
+}
+
+#video-a-la-une h2 {
+  color: rgb(6, 129, 12);
+  font-weight: bolder;
+}
+
+#video-a-la-une h5 {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+#video-a-la-une p {
+  text-align: justify;
+  font-size: 10px;
+}
+
+#archives-videos img {
+  width: 100%;
+  height: 80px;
+  border-radius: 5px;
+  margin-bottom: 5%;
+}
+
+#archives-videos h5 {
+  font-size: 9px;
+  font-weight: bold;
+}
+
+#revues_docmentaires {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.7)),
+    url("carousel/2.jpg");
+  background-size: cover;
+  background-position: bottom;
+  /* height: 80vh; */
+}
+
+#revue_documentaires_content .date_revue {
+  font-size: 13px;
+  font-weight: bold;
+  margin-top: 0;
+}
+
+#revue_documentaires_content .titre_revue {
+  font-size: 13px;
+  font-weight: bold;
+  color: rgb(11, 192, 247);
+}
+
+#revue_documentaires_content .resume_revue {
+  font-size: 10px;
+  text-align: justify;
+  margin-bottom: 0;
+}
+
+#revue_documentaires_content .lien_suite {
+  font-size: 10px;
+  text-decoration: none;
+  margin-top: 0;
+}
+
+#details_modal {
+  font-family: "Times New Roman", Times, serif;
+}
+
+/* Page de suivi spatial des mangroves */
+
+#header2 {
+  background-image: url("nav_images/carte.jpg");
+  background-size: cover;
+  /* width: 100%; */
+  height: 100px;
+  /* border: 2px solid black; */
+}
+
+#header2 h3 {
+  color: #ffffff;
+  padding-top: 3%;
+  padding-left: 10%;
+  font-size: 20px;
+}
+
+#header2 .logo_sco {
+  padding-top: 1%;
+}
+
+#header2 .logo_sco img {
+  float: right;
+  margin-right: 0;
+  width: 20%;
+}
+
+#left_menu,
+#right_menu {
+  padding-right: 0;
+  padding-top: 8px;
+}
+
+#left_menu h4,
+#right_menu h4 {
+  font-weight: bolder;
+  padding-top: 1.5%;
+  color: #275336;
+}
+
+#left_menu .small_img,
+#right_menu .small_img {
+  height: 25px;
+}
+
+#left_menu a {
+  display: inline-block;
+  width: 12%;
+  padding: 0;
+  margin: 0;
+}
+
+.rech_icon {
+  height: 30px;
+  width: 120px;
+  padding: 1% 1% 1% 1%;
+}
+
+/* .carte_icon {
+  height: 30px;
+  width: 80%;
+  padding: 1% 1% 1% 1%;
+} */
+
+/* Rectangles de couleurs pour mangroves */
+
+#first_val_mangrove {
+  display: inline-block;
+  height: 10px;
+  width: 15px;
+  background-color: rgb(80, 41, 76);
+}
+
+#second_val_mangrove {
+  display: inline-block;
+  height: 10px;
+  width: 15px;
+  background-color: rgb(109, 54, 103);
+}
+
+#third_val_mangrove {
+  display: inline-block;
+  height: 10px;
+  width: 15px;
+  background-color: rgb(148, 85, 123);
+}
+
+#fourth_val_mangrove {
+  display: inline-block;
+  height: 10px;
+  width: 15px;
+  background-color: rgb(150, 109, 133);
+}
+
+#fith_val_mangrove {
+  display: inline-block;
+  height: 10px;
+  width: 15px;
+  background-color: rgb(148, 124, 138);
+}
+
+/* Rectangles de couleurs autres occupation du sol */
+
+#first_val_sol {
+  display: inline-block;
+  height: 10px;
+  width: 15px;
+  background-color: #228b22;
+}
+
+#second_val_sol {
+  display: inline-block;
+  height: 10px;
+  width: 15px;
+  background-color: #adff2f;
+}
+
+#third_val_sol {
+  display: inline-block;
+  height: 10px;
+  width: 15px;
+  background-color: #daa520;
+}
+
+#fouth_val_sol {
+  display: inline-block;
+  height: 10px;
+  width: 15px;
+  background-color: #ff8c00;
+}
+
+#fith_val_sol {
+  display: inline-block;
+  height: 10px;
+  width: 15px;
+  background-color: #ffd700;
+}
+
+#sith_val_sol {
+  display: inline-block;
+  height: 10px;
+  width: 15px;
+  background-color: #f0fff0;
+}
+
+#seventh_val_sol {
+  display: inline-block;
+  height: 10px;
+  width: 15px;
+  background-color: #1e90ff;
+}
+
+#eigth_val_sol {
+  display: inline-block;
+  height: 10px;
+  width: 15px;
+  background-color: #dc143c;
+}
+
+#nineth_val_sol {
+  display: inline-block;
+  height: 10px;
+  width: 15px;
+  background-color: #00ffff;
+}
