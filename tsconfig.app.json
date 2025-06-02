@@ -4,12 +4,9 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": ["leaflet", "leaflet-draw"]
+    "types": ["leaflet", "leaflet-draw"],
+    "typeRoots": ["node_modules/@types", "src/@types"]
   },
-  "files": [
-    "src/main.ts"
-  ],
-  "include": [
-    "src/**/*.d.ts"
-  ]
+  "files": ["src/main.ts"],
+  "include": ["src/**/*.d.ts"]
 }

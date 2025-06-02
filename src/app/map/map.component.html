@@ -249,25 +249,24 @@
                                               [style.backgroundColor]="
                                                 c.code_couleur
                                               "
-                                              style="
-                                                width: 20px;
-                                                height: 15px;
-                                                display: inline-block;
-                                                margin-left: 10px;
-                                                margin-top: 12px;
-                                                border: 1px solid #000;
-                                              "
+                                              class="legend-checkbox"
                                             ></span>
                                             <label
                                               [for]="'checkbox-' + c.id"
-                                              class=""
-                                              style="
-                                                font-size: 12px;
-                                                margin-top: 13px;
-                                                margin-left: 10px;
-                                              "
+                                              class="legend-element"
                                             >
                                               {{ c.libelle }}
+                                              <i
+                                                class="btn-sm btn-warning fas fa-info info-legend-btn"
+                                                style="
+                                                  border-radius: 50%;
+                                                  font-size: 10px;
+                                                "
+                                              ></i>
+                                              <span class="custom-tooltip"
+                                                >Description type de
+                                                mangrove</span
+                                              >
                                             </label>
                                           </div>
                                         </div>
@@ -344,23 +343,11 @@
                                               [style.backgroundColor]="
                                                 c.code_couleur
                                               "
-                                              style="
-                                                width: 20px;
-                                                height: 15px;
-                                                display: inline-block;
-                                                margin-left: 10px;
-                                                margin-top: 12px;
-                                                border: 1px solid #000;
-                                              "
+                                              class="legend-checkbox"
                                             ></span>
                                             <label
                                               [for]="'Ocheckbox-' + c.id"
-                                              class=""
-                                              style="
-                                                font-size: 12px;
-                                                margin-top: 13px;
-                                                margin-left: 10px;
-                                              "
+                                              class="legend-element"
                                             >
                                               {{ c.libelle }}
                                             </label>
@@ -384,7 +371,7 @@
                                   aria-controls="alertes"
                                   id="bt"
                                 >
-                                  Alertes de pertubations
+                                  Pertubations
                                 </button>
                               </h2>
                               <div
@@ -625,51 +612,97 @@
                         <div class="tab-pane" id="statistiques">
                           <div *ngIf="globalStatActive">
                             <h4
-                              class="text-center mt-3 mb-5 pb-2"
+                              class="text-center mt-3 mb-2 pb-2"
                               style="font-size: 18px; border: 2px solid #275336"
                             >
                               Statistiques Generales
                             </h4>
-                            <div class="row">
-                              <div class="col-sm-12 text-center">
-                                <label class="label label-success"
-                                  >Superficie totale des especes de mangrove par
-                                  de l'estuaire</label
+                            <div class="row mb-3" style="padding: 0 5px 0 5px">
+                              <div
+                                class="btn-group"
+                                role="group"
+                                aria-label="Basic example"
+                              >
+                                <button
+                                  type="button"
+                                  class="btn btn-success"
+                                  (click)="statsMangroves()"
                                 >
-                                <canvas id="sup-annee"></canvas>
+                                  Mangroves
+                                </button>
+                                <button
+                                  type="button"
+                                  class="btn btn-warning"
+                                  (click)="statsAlertes()"
+                                >
+                                  Pertubations
+                                </button>
                               </div>
-                              <div class="col-sm-10 text-center">
-                                <label class="label label-success"
-                                  >Superficie par especes (en km²)</label
-                                >
-                                <canvas
-                                  id="chartEspeceAnnee"
-                                  height=""
-                                ></canvas>
+                            </div>
+                            <div class="row" *ngIf="activeStatMangroves">
+                              <div
+                                class="col-sm-12 col-md-12 text-center"
+                                style="height: 300px"
+                              >
+                                <div style="width: 100%; align-items: center">
+                                  <div
+                                    id="sup-annee"
+                                    style="height: 250px; width: 100%"
+                                  ></div>
+                                </div>
                               </div>
-                              <div class="col-sm-12 text-center">
-                                <label class="label label-success"
-                                  >Superficie des especes par
-                                  arrondissement</label
-                                >
-                                <canvas id="superficie-arrondissement"></canvas>
+                              <hr style="margin-top: 15px" />
+                              <div
+                                class="col-sm-12 col-md-12 text-center"
+                                style="height: 300px"
+                              >
+                                <div style="width: 100%; align-items: center">
+                                  <div
+                                    id="chartSuperficieEspece"
+                                    style="height: 250px; width: 100%"
+                                  ></div>
+                                </div>
                               </div>
-                              <div class="col-sm-10 text-center">
-                                <label class="label label-success"
-                                  >Superficie dans une province par année</label
+                              <hr style="margin-top: 15px" />
+                              <div
+                                class="col-sm-12 col-md-12 text-center"
+                                style="height: 300px; align-items: center"
+                              >
+                                <select
+                                  class="form-control form-control-sm"
+                                  style="width: 250px"
+                                  [(ngModel)]="selectedCommune"
+                                  (change)="reloadChart()"
                                 >
-                                <canvas id="SupProAnnee"></canvas>
+                                  <option>Choisir</option>
+                                  <option
+                                    *ngFor="let item of communes"
+                                    [value]="item.id"
+                                  >
+                                    {{ item.libelle }}
+                                  </option>
+                                  <option [value]="null">Autres</option>
+                                </select>
+                                <div style="width: 100%; align-items: center">
+                                  <div
+                                    id="chartMangroveCommune"
+                                    style="height: 250px; width: 100%"
+                                  ></div>
+                                </div>
                               </div>
-                              <br /><br /><br />
-                              <hr />
-
-                              <h5 class="text-center">Alertes</h5>
-                              <br /><br />
-                              <div class="col-sm-10 text-center">
-                                <label class="label label-success"
-                                  >Nombre d'alertes par année</label
-                                >
-                                <canvas id="nbr_alerte"></canvas>
+                            </div>
+                            <div class="row" *ngIf="activeStatAlerts">
+                              <!-- <hr style="margin-top: 15px" /> -->
+                              <div
+                                class="col-sm-12 col-md-12 text-center"
+                                style="height: 300px"
+                              >
+                                <div style="width: 100%; align-items: center">
+                                  <div
+                                    id="chartMonthlyAlerts"
+                                    style="height: 250px; width: 100%"
+                                  ></div>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -906,7 +939,6 @@
                         class="btn btn-danger"
                         (click)="removeMap()"
                         title="Supprimer"
-                        [disabled]="statTabActive"
                       >
                         <span class="fas fa-trash"></span>
                         <!-- Classe Font Awesome -->

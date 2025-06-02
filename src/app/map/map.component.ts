@@ -15,6 +15,8 @@ import { SurfaceTotaleAnnee } from '../Model/classe.model';
 import { Chart, registerables } from 'chart.js';
 import { SquareMeterToKmPipe } from '../square-meter-to-km.pipe';
 import { SquareKiloPipe } from '../square-kilo.pipe';
+import * as CanvasJS from '@canvasjs/charts';
+import { interval } from 'rxjs';
 declare var bootstrap: any;
 
 @Component({
@@ -34,6 +36,10 @@ export class MapComponent implements OnInit, OnDestroy {
   masque: any;
   statTabActive: boolean = false;
   globalStatActive: boolean = true;
+  communes: any[] = [];
+  selectedCommune: any;
+  activeStatMangroves: boolean = true;
+  activeStatAlerts: boolean = false;
 
   constructor(
     private apiService: ApiService,
@@ -104,11 +110,14 @@ export class MapComponent implements OnInit, OnDestroy {
     this.loadParametres();
     //this.loadClasses();
     this.loadDates();
-    this.displayChartAnnee();
-    this.displayAlerteAnnee();
-    // this.displayEspeceProvinceAnnee();
-    this.displayEspeceAnnee();
-    this.displayChartArrondissement();
+    this.apiService.getCommunes().subscribe({
+      next: (data) => {
+        // console.log(data);
+        this.communes = data;
+        this.selectedCommune = data[0].id;
+      },
+    });
+
     Chart.register(...registerables);
     this.simulateSelectAllClick();
   }
@@ -286,6 +295,12 @@ export class MapComponent implements OnInit, OnDestroy {
   selectedTab(tab: number): void {
     if (tab == 1) {
       this.statTabActive = true;
+      this.displayChartAnneeMangroveEstuaire();
+      // this.displayChartAnnee();
+      // this.displayAlerteAnnee();
+      // this.displayEspeceProvinceAnnee();
+      this.displayEspeceAnnee();
+      this.displayChartArrondissement();
     } else {
       this.statTabActive = false;
     }
@@ -1224,6 +1239,27 @@ export class MapComponent implements OnInit, OnDestroy {
     this.isStatVisible = false; // Affiche la carte
   }
 
+  renameKeys(
+    dictionary: { [key: string]: any },
+    keyMap: { [key: string]: string }
+  ): { [key: string]: any } {
+    const renamedDictionary: { [key: string]: any } = {};
+    for (const oldKey in dictionary) {
+      if (dictionary.hasOwnProperty(oldKey)) {
+        const newKey = keyMap[oldKey] || oldKey;
+        renamedDictionary[newKey] = dictionary[oldKey];
+      }
+    }
+    return renamedDictionary;
+  }
+
+  renameAllKeys(
+    list: { [key: string]: any }[],
+    keyMap: { [key: string]: string }
+  ): { [key: string]: any }[] {
+    return list.map((dictionary) => this.renameKeys(dictionary, keyMap));
+  }
+
   displayChartAnnee(): void {
     this.apiService.getSurfaceTotaleAnnee().subscribe({
       next: (data: SurfaceTotaleAnnee[]) => {
@@ -1236,34 +1272,66 @@ export class MapComponent implements OnInit, OnDestroy {
           this.squareMeterToKmPipe.transform(item.surface_totale)
         );
 
+        // console.log(data);
+
+        const keyMap = {
+          date: 'label',
+          surface_totale: 'y',
+        };
+
+        let chartData = this.renameAllKeys(data, keyMap);
+
+        chartData = chartData.map((dictionary) => {
+          dictionary['label'] = new Date(dictionary['label'])
+            .getFullYear()
+            .toString();
+          dictionary['y'] = Number(
+            this.squareMeterToKmPipe.transform(dictionary['y']).toFixed(2)
+          );
+          return dictionary;
+        });
+
+        // console.log(chartData);
+
         // Créer un nouveau graphique
-        const ctx = document.getElementById('sup-annee') as HTMLCanvasElement;
-        if (ctx) {
-          // Créer et configurer le graphique
-          new Chart(ctx, {
-            type: 'bar',
-            data: {
-              labels: labels, // Les années comme labels
-              datasets: [
-                {
-                  label: 'Superficie totale en km²',
-                  data: surfaces,
-                  borderWidth: 2,
-                },
-              ],
+        const chart = new CanvasJS.Chart('sup-annee', {
+          width: 400,
+          height: 300,
+          animationEnabled: true,
+          title: {
+            text: "Superficie totale des especes de mangrove par de l'estuaire",
+            fontSize: 16,
+          },
+
+          axisX: {
+            title: 'Année',
+            fontSize: 12,
+            // interval: 1,
+            intervalType: 'year',
+            // valueFormatString: 'YYYY',
+            labelFormater: function (e: any) {
+              return new Date(e.value).getFullYear().toString();
             },
-            options: {
-              responsive: true,
-              plugins: {
-                legend: {
-                  position: 'top',
-                },
-              },
+          },
+          axisY: {
+            title: 'Superficie en km²',
+            fontSize: 12,
+            gridThickness: 0,
+            tickLength: 0,
+            // includeZero: true,
+          },
+          dataPointWidth: Math.round(180 / chartData.length),
+          data: [
+            {
+              type: 'bar',
+              toolTipContent:
+                'Année: <b>{label}</b><br>Superficie: <b>{y} km²</b>',
+              dataPoints: chartData,
             },
-          });
-        } else {
-          // this.toastr.error('Canvas pour le graphique non trouvé');
-        }
+          ],
+        });
+
+        chart.render();
       },
       error: (err) => {
         this.toastr.error(
@@ -1275,41 +1343,115 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   displayAlerteAnnee(): void {
-    this.apiService.getNbrAlertes().subscribe({
-      next: (data: NbrAlerte[]) => {
+    this.apiService.getSurfaceAlertes().subscribe({
+      next: (data: any[]) => {
         // Extraire les années uniquement pour les labels
         // const labels = data.map((item) => new Date(item.date).getFullYear().toString());
-        const labels = data.map((item) => item.annee);
-        const surfaces = data.map((item) => item.nombre_alerte);
+        // console.log(data);
+
+        const cleanData = data.map((dictionary: any) => {
+          dictionary['month'] = new Date(dictionary['dates']).getMonth() + 1;
+          dictionary['year'] = new Date(dictionary['dates']).getFullYear();
+          return dictionary;
+        });
+
+        const keyMap = {
+          month: 'label',
+          area_m2: 'y',
+        };
+
+        let chartData = this.renameAllKeys(cleanData, keyMap);
+
+        chartData = chartData.map((dictionary: any) => {
+          dictionary['label'] = `${new Date(dictionary['dates']).toLocaleString(
+            'fr-FR',
+            { month: 'long' }
+          )} ${dictionary['year']}`;
+          return dictionary;
+        });
+
+        // console.log(chartData);
+
+        let groupedData = Object.values(
+          chartData.reduce((acc: any, item: any) => {
+            if (!acc[item.label]) {
+              acc[item.label] = { ...item }; // Copy the object
+            } else {
+              acc[item.label].y += item.y; // Sum the area
+            }
+            return acc;
+          }, {} as { [key: number]: { label: string; y: number } })
+        );
+
+        // console.log(groupedData);
+
+        const monthNamesFr = [
+          'janvier',
+          'février',
+          'mars',
+          'avril',
+          'mai',
+          'juin',
+          'juillet',
+          'août',
+          'septembre',
+          'octobre',
+          'novembre',
+          'décembre',
+        ];
 
         // Créer un nouveau graphique
-        const ctx = document.getElementById('nbr_alerte') as HTMLCanvasElement;
-        if (ctx) {
-          // Créer et configurer le graphique
-          new Chart(ctx, {
-            type: 'bar',
-            data: {
-              labels: labels, // Les années comme labels
-              datasets: [
-                {
-                  label: "Nombre d'alertes",
-                  data: surfaces,
-                  borderWidth: 2,
-                },
-              ],
+        const chart = new CanvasJS.Chart('chartMonthlyAlerts', {
+          width: 400,
+          height: 300,
+          animationEnabled: true,
+          title: {
+            text: 'Pertubations mensuelle (en m²)',
+            fontSize: 16,
+          },
+
+          axisX: {
+            title: 'Mois',
+            fontSize: 12,
+            interval: 1,
+            // valueFormatString: 'YYYY',
+            labelMaxWidth: 60,
+            labelWrap: true,
+            labelAngle: -30,
+          },
+          axisY: {
+            title: 'Superficie en m²',
+            fontSize: 12,
+            gridThickness: 0,
+            tickLength: 0,
+            // interval: 1,
+            // includeZero: true,
+          },
+          // dataPointWidth: Math.round(300 / chartData.length),
+          data: [
+            {
+              type: 'bar',
+              toolTipContent:
+                'Mois: <b>{label}</b><br>Superficie: <b>{y} m²</b>',
+              dataPoints: groupedData.sort((a: any, b: any) => {
+                const [monthA, yearA] = a.label.toLowerCase().split(' ');
+                const [monthB, yearB] = b.label.toLowerCase().split(' ');
+
+                const dateA = new Date(
+                  Number(yearA),
+                  monthNamesFr.indexOf(monthA)
+                );
+                const dateB = new Date(
+                  Number(yearB),
+                  monthNamesFr.indexOf(monthB)
+                );
+
+                return dateA.getTime() - dateB.getTime();
+              }),
             },
-            options: {
-              responsive: true,
-              plugins: {
-                legend: {
-                  position: 'top',
-                },
-              },
-            },
-          });
-        } else {
-          this.toastr.error('Canvas pour le graphique non trouvé');
-        }
+          ],
+        });
+        chart.render();
       },
       error: (err) => {
         this.toastr.error(
@@ -1326,6 +1468,8 @@ export class MapComponent implements OnInit, OnDestroy {
       const years = [
         ...new Set(data.map((item) => new Date(item.date).getFullYear())),
       ].sort();
+
+      // console.log(data);
 
       // Regrouper les données par année et par espèce
       const datasets = years.map((year) => {
@@ -1348,28 +1492,61 @@ export class MapComponent implements OnInit, OnDestroy {
         };
       });
 
-      const ctx = document.getElementById(
-        'chartEspeceAnnee'
-      ) as HTMLCanvasElement;
-      if (ctx) {
-        new Chart(ctx, {
-          type: 'bar',
-          data: {
-            labels: types, // Espèces sur l'axe X
-            datasets: datasets, // Données pour chaque année
+      const keyMap = {
+        type: 'label',
+        surface_totale: 'y',
+        code_couleur: 'color',
+      };
+
+      let chartData = this.renameAllKeys(data, keyMap);
+
+      // console.log(chartData);
+
+      chartData = chartData.map((dictionary) => {
+        dictionary['y'] = Number(
+          this.squareMeterToKmPipe.transform(dictionary['y']).toFixed(2)
+        );
+        return dictionary;
+      });
+
+      // Créer un nouveau graphique
+      const chart = new CanvasJS.Chart('chartSuperficieEspece', {
+        width: 400,
+        height: 300,
+        animationEnabled: true,
+        title: {
+          text: 'Superficie par especes (en km²)',
+          fontSize: 16,
+        },
+
+        axisX: {
+          title: 'Type de mangrove',
+          fontSize: 12,
+          interval: 1,
+          // valueFormatString: 'YYYY',
+          labelMaxWidth: 60,
+          labelWrap: true,
+          labelAngle: -30,
+        },
+        axisY: {
+          title: 'Superficie en km²',
+          fontSize: 12,
+          gridThickness: 0,
+          tickLength: 0,
+          // interval: 1,
+          // includeZero: true,
+        },
+        dataPointWidth: Math.round(200 / chartData.length),
+        data: [
+          {
+            type: 'bar',
+            toolTipContent:
+              'Type: <b>{label}</b><br>Superficie: <b>{y} km²</b>',
+            dataPoints: chartData,
           },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: {
-                display: false, // Désactiver la légende
-              },
-            },
-          },
-        });
-      } else {
-        this.toastr.error('Canvas non trouvé');
-      }
+        ],
+      });
+      chart.render();
     });
   }
 
@@ -1377,7 +1554,7 @@ export class MapComponent implements OnInit, OnDestroy {
     // Récupérer les données via le service
     this.apiService.getSuperficieParArrondissement().subscribe({
       next: (data) => {
-        //console.log('Données récupérées pour les arrondissements:', data);
+        // console.log('Données récupérées pour les arrondissements:', data);
         // Extraire les arrondissements pour les labels
         const labels = data.map((item) => item.arrondissement);
         //console.log('Arrondissements bruts:', labels);
@@ -1386,58 +1563,156 @@ export class MapComponent implements OnInit, OnDestroy {
         const superficies = data.map((item) => item.superficie);
         //console.log('Superficies brutes:', superficies);
 
+        const keyMap = {
+          arrondissement: 'label',
+          superficie: 'y',
+        };
+
+        let chartData = this.renameAllKeys(data, keyMap);
+
+        chartData = chartData.filter(
+          (el: any) => el.commune_id == this.selectedCommune
+        );
+
+        // chartData = chartData.map((dictionary) => {
+        //   dictionary['y'] = Number(
+        //     this.squareMeterToKmPipe.transform(dictionary['y']).toFixed(2)
+        //   );
+        //   return dictionary;
+        // });
+
+        // console.log(chartData);
+
         // Créer et configurer le graphique
-        const ctx = document.getElementById(
-          'superficie-arrondissement'
-        ) as HTMLCanvasElement;
-        if (ctx) {
-          new Chart(ctx, {
-            type: 'bar',
-            data: {
-              labels: labels,
-              // datasets: [{
-              //   label: 'Superficie (en km²)',
-              //   data: superficies,
-              //   backgroundColor: 'rgba(75, 192, 192, 0.2)',
-              //   borderColor: 'rgba(75, 192, 192, 1)',
-              //   borderWidth: 1
-              // }]
-              datasets: [
-                {
-                  label: 'Superficie (en km²)',
-                  data: superficies,
-                  backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                  borderColor: 'rgba(75, 192, 192, 1)',
-                  borderWidth: 1,
-                },
-              ],
+        const chart = new CanvasJS.Chart('chartMangroveCommune', {
+          width: 400,
+          height: 300,
+          animationEnabled: true,
+          title: {
+            text: 'Superficie des mangroves par arrondissements (en m²)',
+            fontSize: 16,
+          },
+
+          axisX: {
+            title: 'Arrondissements',
+            fontSize: 12,
+            interval: 1,
+            // valueFormatString: 'YYYY',
+            labelMaxWidth: 60,
+            labelWrap: true,
+            labelAngle: -30,
+          },
+          axisY: {
+            title: 'Superficie en m²',
+            fontSize: 12,
+            gridThickness: 0,
+            tickLength: 0,
+            // interval: 1,
+            // includeZero: true,
+          },
+          // dataPointWidth: Math.round(300 / chartData.length),
+          data: [
+            {
+              type: 'bar',
+              toolTipContent:
+                'Arrondissement: <b>{label}</b><br>Superficie: <b>{y} m²</b>',
+              dataPoints: chartData,
             },
-            options: {
-              responsive: true,
-              plugins: {
-                legend: {
-                  position: 'top',
-                },
-                tooltip: {
-                  callbacks: {
-                    label: function (context) {
-                      return context.raw + ' km²';
-                    },
-                  },
-                },
-              },
-              scales: {
-                y: {
-                  beginAtZero: true,
-                },
-              },
-            },
-          });
-        }
+          ],
+        });
+        chart.render();
       },
       error: (err) => {
         console.error('Erreur lors de la récupération des données : ', err);
       },
     });
+  }
+
+  displayChartAnneeMangroveEstuaire(): void {
+    this.apiService.getSurperficieMangroveEstuaire().subscribe({
+      next: (data) => {
+        // console.log(data);
+
+        const keyMap = {
+          year: 'label',
+          total_area: 'y',
+        };
+
+        let chartData = this.renameAllKeys(data, keyMap);
+
+        chartData = chartData.map((dictionary) => {
+          dictionary['y'] = Number(
+            this.squareMeterToKmPipe.transform(dictionary['y']).toFixed(2)
+          );
+          return dictionary;
+        });
+
+        // console.log(chartData);
+
+        // Créer un nouveau graphique
+        const chart = new CanvasJS.Chart('sup-annee', {
+          width: 400,
+          height: 300,
+          animationEnabled: true,
+          title: {
+            text: "Superficie totale des mangrove par de l'estuaire",
+            fontSize: 16,
+          },
+
+          axisX: {
+            title: 'Année',
+            fontSize: 5,
+            // interval: 1,
+            intervalType: 'year',
+            // valueFormatString: 'YYYY',
+            labelWrap: true,
+            labelAngle: -30,
+          },
+          axisY: {
+            title: 'Superficie en km²',
+            fontSize: 5,
+            gridThickness: 0,
+            tickLength: 0,
+            valueFormatString: '####',
+            labelWrap: true,
+            labelAngle: -30,
+            includeZero: true,
+          },
+          dataPointWidth: Math.round(180 / chartData.length),
+          data: [
+            {
+              type: 'bar',
+              toolTipContent:
+                'Année: <b>{label}</b><br>Superficie: <b>{y} km²</b>',
+              dataPoints: chartData,
+            },
+          ],
+        });
+
+        chart.render();
+      },
+      error: (err) => {
+        this.toastr.error(
+          'Erreur lors de la récupération des données pour le graphique : ' +
+            (err.message || 'Erreur inconnue')
+        );
+      },
+    });
+  }
+
+  reloadChart() {
+    this.displayChartArrondissement();
+  }
+
+  statsMangroves() {
+    this.activeStatAlerts = false;
+    this.activeStatMangroves = true;
+    this.selectedTab(1);
+  }
+
+  statsAlertes() {
+    this.activeStatAlerts = true;
+    this.activeStatMangroves = false;
+    this.displayAlerteAnnee();
   }
 }

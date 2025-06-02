@@ -210,6 +210,49 @@ pagination-controls {
   margin: auto;
 }
 
+.legend-element {
+  font-size: 12px;
+  margin-top: 13px;
+  margin-left: 10px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.legend-checkbox {
+  width: 20px;
+  height: 15px;
+  display: inline-block;
+  margin-left: 10px;
+  margin-top: 12px;
+  border: 1px solid #000;
+}
+
+.legend-element .custom-tooltip {
+  visibility: hidden;
+  background-color: rgb(17, 16, 16, 0.7);
+  color: #fff;
+  width: 150px;
+  height: auto;
+  text-align: justify;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  border-radius: 4px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: -30%; /* Position above the anchor */
+  left: 75%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  /* white-space: nowrap; */
+}
+
+.legend-element:hover .custom-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
 /* Cacher la legende pour les petits ecrans (max width 768px) */
 @media screen and (min-width: 767px) and (max-width: 979px) {
   /* #right_menu {
@@ -239,5 +282,10 @@ pagination-controls {
 
   .legend-btn {
     display: block;
+  }
+
+  .canvasjs-chart-canvas {
+    width: 100% !important;
+    height: 300px !important;
   }
 }
