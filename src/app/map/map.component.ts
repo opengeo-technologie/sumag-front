@@ -17,7 +17,13 @@ import { SquareMeterToKmPipe } from '../square-meter-to-km.pipe';
 import { SquareKiloPipe } from '../square-kilo.pipe';
 import * as CanvasJS from '@canvasjs/charts';
 import { interval } from 'rxjs';
+import 'leaflet-extra-markers';
 declare var bootstrap: any;
+declare module 'leaflet' {
+  namespace ExtraMarkers {
+    function icon(options: any): L.Icon;
+  }
+}
 
 @Component({
   selector: 'app-map',
@@ -40,6 +46,9 @@ export class MapComponent implements OnInit, OnDestroy {
   selectedCommune: any;
   activeStatMangroves: boolean = true;
   activeStatAlerts: boolean = false;
+  mangrove_estuaire: any;
+  geojsonLayer: any;
+  activeBuffer: L.Circle | null = null;
 
   constructor(
     private apiService: ApiService,
@@ -169,16 +178,16 @@ export class MapComponent implements OnInit, OnDestroy {
     //Définir la couche WMS avec votre style et options
 
     this.masque = L.tileLayer.wms(
-      'http://41.159.150.28:8080/geoserver/sco/wms',
+      'http://41.159.150.28:8080/geoserver/ageos_base/wms',
       {
-        layers: 'sco:mangroves',
+        layers: 'ageos_base:mangrove_estuaire_final',
         format: 'image/png',
         transparent: true,
       }
     );
 
     this.masque.addTo(this.map);
-    this.masque.setZIndex(400);
+    this.masque.setZIndex(600);
 
     //Définir la couche WMS avec votre style et options
 
@@ -204,7 +213,7 @@ export class MapComponent implements OnInit, OnDestroy {
     );
 
     this.mangrove.addTo(this.map);
-    this.mangrove.setZIndex(600);
+    this.mangrove.setZIndex(700);
 
     this.province.addTo(this.map);
     this.province.setZIndex(100);
@@ -221,7 +230,7 @@ export class MapComponent implements OnInit, OnDestroy {
     );
 
     this.occupation.addTo(this.map);
-    this.occupation.setZIndex(500);
+    this.occupation.setZIndex(400);
 
     // Contrôle pour basculer entre les fonds de carte
     L.control
@@ -567,7 +576,7 @@ export class MapComponent implements OnInit, OnDestroy {
   simulateSelectAllClick(): void {
     setTimeout(() => {
       const button = document.querySelector(
-        '#selectAllCheckbox'
+        '#selectAllCheckboxes'
       ) as HTMLInputElement;
       if (button) {
         button.click();
@@ -817,6 +826,33 @@ export class MapComponent implements OnInit, OnDestroy {
     this.mangrove.addTo(this.map);
   }
 
+  toggleAllMangrovesEstuaire(event: any): void {
+    const isChecked = event.target.checked;
+    const checkboxes = document.querySelectorAll(
+      '#subItemthree input[type="checkbox"]'
+    );
+    // console.log('Nombre de cases trouvées :', checkboxes.length);
+
+    // Mettre à jour les cases à cocher
+    checkboxes.forEach((checkbox: Element) => {
+      const inputCheckbox = checkbox as HTMLInputElement;
+      inputCheckbox.checked = isChecked;
+      // console.log(inputCheckbox);
+      // const checkboxValue = inputCheckbox.value;
+      // console.log(checkboxValue);
+    });
+
+    if (isChecked) {
+      this.masque.addTo(this.map);
+      this.masque.setZIndex(600);
+    } else {
+      this.map.removeLayer(this.masque);
+    }
+
+    // // Si des IDs sont sélectionnés, lancer la requête de filtrage
+    // this.filterClass();
+  }
+
   ////////////////// FIN DES METHODES DE MANGROVES  /////////////////////
 
   ////////////////////////////// STATISTIQUES /////////////////////////////////
@@ -880,6 +916,10 @@ export class MapComponent implements OnInit, OnDestroy {
 
   onAlertesCheckChange(event: any, item: any, isParent: boolean = false) {
     // Si la case est parent (année)
+    this.addCentroidsAlerts();
+    // if (this.activeBuffer) {
+    //   this.map.removeLayer(this.activeBuffer);
+    // }
     if (isParent) {
       // Vérifier si la case parent (année) est cochée ou décochée
       if (event.target.checked) {
@@ -942,7 +982,7 @@ export class MapComponent implements OnInit, OnDestroy {
       service: 'WMS',
       version: '1.1.0',
       request: 'GetMap',
-      layers: 'ageos_base:Alerte',
+      layers: 'ageos_base:alertes_final_version',
       format: 'image/png',
       transparent: 'true',
       CQL_FILTER: cqlFilter,
@@ -955,9 +995,9 @@ export class MapComponent implements OnInit, OnDestroy {
     }
 
     this.alertesMap = L.tileLayer.wms(wmsUrl, wmsParams);
-    console.log(this.alertesMap);
+    // console.log(this.alertesMap);
     this.alertesMap.addTo(this.map);
-    this.alertesMap.setZIndex(700);
+    this.alertesMap.setZIndex(800);
   }
 
   toggleAllAlertes(event: any): void {
@@ -1156,6 +1196,7 @@ export class MapComponent implements OnInit, OnDestroy {
       if (this.mangrove) {
         this.map.removeLayer(this.mangrove);
       }
+
       const layer = L.geoJSON(this.alertes, {
         onEachFeature: (feature, layer) => {
           const originalColor = feature.properties?.code_couleur || '#FF69B4';
@@ -1227,6 +1268,56 @@ export class MapComponent implements OnInit, OnDestroy {
     } else {
       this.removeAlertesByDate(date); // Si décoché, supprimer les alertes
     }
+  }
+
+  addCentroidsAlerts() {
+    this.apiService.getCentroidAlerts().subscribe({
+      next: (data: any[]) => {
+        // Extraire les années uniquement pour les labels
+        // console.log(data);
+        // console.log(L.ExtraMarkers);
+        var redMarker = (L as any).ExtraMarkers.icon({
+          icon: 'fa-warning',
+          markerColor: 'yellow',
+          shape: 'circle',
+          prefix: 'fas',
+        });
+        // let activeBuffer: L.Circle | null = null;
+        this.geojsonLayer = L.geoJSON(data, {
+          pointToLayer: function (feature, latlng) {
+            return L.marker(latlng, { icon: redMarker });
+          },
+          onEachFeature: (feature, layer) => {
+            // layer.bindPopup('Aller vers');
+            layer.on('click', () => {
+              const marker = layer as L.Marker; // 👈 Cast it
+              const latlng = marker.getLatLng(); // ✅ No more error
+              // Create a buffer (circle) with radius in meters
+              if (this.activeBuffer) {
+                this.map.removeLayer(this.activeBuffer);
+              }
+
+              this.activeBuffer = L.circle(latlng, {
+                radius: 500,
+                color: 'yellow',
+                weight: 2,
+                fillColor: 'yellow',
+                fillOpacity: 0.0,
+              }).addTo(this.map);
+              this.map.fitBounds(this.activeBuffer.getBounds());
+            });
+          },
+        }).addTo(this.map);
+
+        // this.map.fitBounds(geojsonLayer.getBounds());
+      },
+      error: (err) => {
+        this.toastr.error(
+          'Erreur lors de la récupération des données pour le graphique : ' +
+            (err.message || 'Erreur inconnue')
+        );
+      },
+    });
   }
 
   //////////////////// STATISTICS //////////////////
@@ -1320,7 +1411,7 @@ export class MapComponent implements OnInit, OnDestroy {
             tickLength: 0,
             // includeZero: true,
           },
-          dataPointWidth: Math.round(180 / chartData.length),
+          dataPointWidth: Math.round(150 / chartData.length),
           data: [
             {
               type: 'bar',
@@ -1509,6 +1600,12 @@ export class MapComponent implements OnInit, OnDestroy {
         return dictionary;
       });
 
+      let test_data = [
+        { label: 'Avicennia germinans', y: 82.176494 },
+        { label: 'Rhizophora racemosa', y: 260.412126 },
+        { label: 'Rhizophora harrisonii', y: 643.739646 },
+      ];
+
       // Créer un nouveau graphique
       const chart = new CanvasJS.Chart('chartSuperficieEspece', {
         width: 400,
@@ -1542,7 +1639,7 @@ export class MapComponent implements OnInit, OnDestroy {
             type: 'bar',
             toolTipContent:
               'Type: <b>{label}</b><br>Superficie: <b>{y} km²</b>',
-            dataPoints: chartData,
+            dataPoints: test_data,
           },
         ],
       });
@@ -1589,7 +1686,7 @@ export class MapComponent implements OnInit, OnDestroy {
           height: 300,
           animationEnabled: true,
           title: {
-            text: 'Superficie des mangroves par arrondissements (en m²)',
+            text: 'Superficie des mangroves par commune (en m²)',
             fontSize: 16,
           },
 
@@ -1678,7 +1775,7 @@ export class MapComponent implements OnInit, OnDestroy {
             labelAngle: -30,
             includeZero: true,
           },
-          dataPointWidth: Math.round(180 / chartData.length),
+          dataPointWidth: Math.round(120 / chartData.length),
           data: [
             {
               type: 'bar',

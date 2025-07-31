@@ -30,7 +30,7 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
           <span class="navbar-text" style="position: relative; top: 6px">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a
                   class="nav-link text-white underline-linkk"
                   href="https://snornf.ga/"
@@ -38,7 +38,7 @@
                 >
                   Snornf</a
                 >
-              </li>
+              </li> -->
               <li class="nav-item">
                 <a
                   class="nav-link text-white underline-linkk"
@@ -95,773 +95,953 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-4" id="right_menu">
-            <div
-              id="carouselContent"
-              class="carousel slide"
-              data-bs-ride="false"
-              data-bs-interval="false"
-            >
-              <div class="carousel-inner">
-                <!-- Slide 1 : Tableau de bord statistique -->
-                <div class="carousel-item active" id="occ">
-                  <div class="card">
-                    <div class="card-header">
-                      <div class="row">
-                        <ul class="nav nav-tabs nav-fill">
-                          <li class="nav-item">
-                            <a
-                              class="nav-link active"
-                              href="#couches-thematiques"
-                              role="tab"
-                              data-bs-toggle="tab"
-                              (click)="selectedTab(0)"
-                            >
-                              <div class="d-flex align-items-center">
-                                <i class="fg-pyramid fg-2x"></i>
-                                <span
-                                  class="fw-bold fs-8"
-                                  style="padding-left: 10px"
-                                  >Couches</span
-                                >
-                              </div>
-                            </a>
-                          </li>
-                          <li class="nav-item">
-                            <a
-                              class="nav-link"
-                              href="#statistiques"
-                              role="tab"
-                              data-bs-toggle="tab"
-                              (click)="selectedTab(1)"
-                              id="#statistiques"
-                            >
-                              <div class="d-flex align-items-center">
-                                <i class="fg-profile fg-2x"></i>
-                                <span
-                                  class="fw-bold fs-8"
-                                  style="padding-left: 10px"
-                                  >Statistiques</span
-                                >
-                              </div></a
-                            >
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div class="card-body" style="height: 81vh; padding: 0px">
-                      <div
-                        class="tab-content"
-                        style="max-height: 81vh; overflow-y: auto"
+            <div class="card">
+              <div class="card-header">
+                <div class="row">
+                  <ul
+                    class="nav nav-tabs nav-fill"
+                    style="overflow: visible !important"
+                  >
+                    <li class="nav-item">
+                      <a
+                        class="nav-link active"
+                        href="#couches-thematiques"
+                        role="tab"
+                        data-bs-toggle="tab"
+                        (click)="selectedTab(0)"
                       >
-                        <!-- Affichage de la data des couches thematiques et alertes -->
-                        <div class="tab-pane active" id="couches-thematiques">
-                          <div class="accordion" id="main_themes">
-                            <div class="accordion-item">
-                              <h2 class="accordion-header" id="occupation_sol">
-                                <button
-                                  class="accordion-button"
-                                  type="button"
-                                  data-bs-toggle="collapse"
-                                  data-bs-target="#occupation_sol_content"
-                                  aria-expanded="true"
-                                  aria-controls="occupation_sol_content"
-                                  id="bt"
-                                >
-                                  Occupation du sol
-                                </button>
-                              </h2>
-                              <div
-                                id="occupation_sol_content"
-                                class="accordion-collapse collapse show"
-                                aria-labelledby="occupation_sol"
-                              >
-                                <div class="accordion-body">
-                                  <div id="sub_themes" style="margin-left: 5%">
-                                    <ul class="list-unstyled" id="magr">
-                                      <div class="row">
-                                        <div class="d-flex align-items-center">
-                                          <!-- Bouton avec la flèche -->
-                                          <button
-                                            id="btn"
-                                            class="btn btn-link text-decoration-none caret-subtitle"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#subItemOne"
-                                            aria-expanded="false"
-                                            aria-controls="subItemOne"
-                                          >
-                                            <i
-                                              class="fa fa-caret-right me-2"
-                                              id="iconSubOne"
-                                            ></i>
-                                          </button>
+                        <div class="d-flex align-items-center">
+                          <i class="fg-pyramid fg-2x"></i>
+                          <span class="fw-bold fs-8" style="padding-left: 10px"
+                            >Couches</span
+                          >
+                        </div>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a
+                        class="nav-link"
+                        href="#statistiques"
+                        role="tab"
+                        data-bs-toggle="tab"
+                        (click)="selectedTab(1)"
+                        id="#statistiques"
+                      >
+                        <div class="d-flex align-items-center">
+                          <i class="fg-profile fg-2x"></i>
+                          <span class="fw-bold fs-8" style="padding-left: 10px"
+                            >Statistiques</span
+                          >
+                        </div></a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="card-body" style="height: 81vh; padding: 0px">
+                <div
+                  style="
+                    height: 70vh;
+                    overflow-x: visible !important;
+                    position: relative;
+                  "
+                >
+                  <div
+                    class="tab-content"
+                    style="
+                      height: 81vh;
+                      overflow-x: visible;
+                      position: relative;
+                    "
+                  >
+                    <!-- Affichage de la data des couches thematiques et alertes -->
+                    <div class="tab-pane active" id="couches-thematiques">
+                      <div class="accordion" id="main_themes">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="occupation_sol">
+                            <button
+                              class="accordion-button"
+                              type="button"
+                              data-bs-toggle="collapse"
+                              data-bs-target="#occupation_sol_content"
+                              aria-expanded="true"
+                              aria-controls="occupation_sol_content"
+                              id="bt"
+                            >
+                              Occupation du sol
+                            </button>
+                          </h2>
+                          <div
+                            id="occupation_sol_content"
+                            class="accordion-collapse collapse show"
+                            aria-labelledby="occupation_sol"
+                            data-bs-parent="#main_themes"
+                            style="height: 60vh; overflow-x: visible"
+                          >
+                            <div class="accordion-body">
+                              <div id="sub_themes" style="margin-left: 5%">
+                                <ul class="list-unstyled" id="magr_estuaire">
+                                  <div class="row">
+                                    <div class="d-flex align-items-center">
+                                      <!-- Bouton avec la flèche -->
+                                      <button
+                                        id="btn"
+                                        class="btn btn-link text-decoration-none caret-subtitle"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#subItemthree"
+                                        aria-expanded="false"
+                                        aria-controls="subItemOne"
+                                      >
+                                        <i
+                                          class="fa fa-caret-right me-2"
+                                          id="iconSubOne"
+                                        ></i>
+                                      </button>
 
-                                          <!-- Checkbox avec étiquette -->
-                                          <div class="form-check me-2">
-                                            <input
-                                              class="form-check-input"
-                                              type="checkbox"
-                                              value=""
-                                              id="selectAllCheckbox"
-                                              style="border-radius: 50%"
-                                              (change)="
-                                                toggleAllMangroves($event)
-                                              "
-                                            />
-                                            <label
-                                              class="form-check-label"
-                                              for="selectAllCheckbox"
-                                              style="font-size: 14px"
-                                            >
-                                              Mangroves
-                                            </label>
-                                          </div>
-                                        </div>
-                                      </div>
-
-                                      <li class="myli">
-                                        <div
-                                          id="subItemOne"
-                                          class="collapse show"
-                                        >
-                                          <!-- container classes -->
-                                          <div
-                                            *ngFor="let c of especes"
-                                            class="form-check d-flex align-items-center mb-2"
-                                            style="
-                                              position: relative;
-                                              bottom: 10px;
-                                              left: 10px;
-                                            "
-                                          >
-                                            <input
-                                              type="checkbox"
-                                              class="form-check-input"
-                                              value="{{ c.id }}"
-                                              style="border-radius: 50%"
-                                              [(ngModel)]="c.selected"
-                                              (change)="
-                                                onMangroveCheckChange(c)
-                                              "
-                                              [id]="'checkbox-' + c.id"
-                                            />
-                                            <span
-                                              [style.backgroundColor]="
-                                                c.code_couleur
-                                              "
-                                              class="legend-checkbox"
-                                            ></span>
-                                            <label
-                                              [for]="'checkbox-' + c.id"
-                                              class="legend-element"
-                                            >
-                                              {{ c.libelle }}
-                                              <i
-                                                class="btn-sm btn-warning fas fa-info info-legend-btn"
-                                                style="
-                                                  border-radius: 50%;
-                                                  font-size: 10px;
-                                                "
-                                              ></i>
-                                              <span class="custom-tooltip"
-                                                >Description type de
-                                                mangrove</span
-                                              >
-                                            </label>
-                                          </div>
-                                        </div>
-                                      </li>
-                                    </ul>
-                                    <ul class="list-unstyled" id="occ">
-                                      <div class="row">
-                                        <div class="d-flex align-items-center">
-                                          <!-- Bouton avec la flèche -->
-                                          <button
-                                            id="btn"
-                                            class="btn btn-link text-decoration-none caret-subtitle"
-                                            aria-expanded="true"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#subItemtwo"
-                                            aria-expanded="false"
-                                            aria-controls="subItemOne"
-                                          >
-                                            <i
-                                              class="fa fa-caret-right me-2"
-                                              id="iconSubOne"
-                                            ></i>
-                                          </button>
-
-                                          <!-- Checkbox avec étiquette -->
-                                          <div class="form-check me-2">
-                                            <input
-                                              class="form-check-input"
-                                              type="checkbox"
-                                              style="border-radius: 50%"
-                                              id="selectAllCheckboxs"
-                                              (change)="
-                                                toggleAllOccupations($event)
-                                              "
-                                            />
-                                            <label
-                                              class="form-check-label"
-                                              for="selectAllCheckboxs"
-                                              style="font-size: 14px"
-                                            >
-                                              Autres occupations du sol
-                                            </label>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <li class="myli">
-                                        <div
-                                          id="subItemtwo"
-                                          class="collapse"
+                                      <!-- Checkbox avec étiquette -->
+                                      <div class="form-check me-2">
+                                        <input
+                                          class="form-check-input"
+                                          type="checkbox"
+                                          value=""
+                                          id="selectAllCheckboxes"
+                                          style="border-radius: 50%"
+                                          (change)="
+                                            toggleAllMangrovesEstuaire($event)
+                                          "
+                                        />
+                                        <label
+                                          class="form-check-label"
+                                          for="selectAllCheckboxes"
                                           style="
+                                            font-size: 14px;
                                             position: relative;
-                                            bottom: 10px;
-                                            left: 10px;
                                           "
                                         >
-                                          <!-- container classes -->
-                                          <div
-                                            *ngFor="let c of classe"
-                                            class="form-check d-flex align-items-center mb-2"
+                                          Mangroves de l'Estuaire
+                                          <i
+                                            class="btn-sm btn-warning fas fa-info info-legend-btn"
+                                            style="
+                                              border-radius: 50%;
+                                              font-size: 10px;
+                                            "
                                           >
-                                            <input
-                                              type="checkbox"
-                                              value="{{ c.id }}"
-                                              class="form-check-input"
-                                              style="border-radius: 50%"
-                                              [(ngModel)]="c.selected"
-                                              (change)="
-                                                onOccupationCheckChange(c)
-                                              "
-                                              [id]="'Ocheckbox-' + c.id"
-                                            />
-                                            <span
-                                              [style.backgroundColor]="
-                                                c.code_couleur
-                                              "
-                                              class="legend-checkbox"
-                                            ></span>
-                                            <label
-                                              [for]="'Ocheckbox-' + c.id"
-                                              class="legend-element"
-                                            >
-                                              {{ c.libelle }}
-                                            </label>
-                                          </div>
-                                        </div>
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div class="accordion-item">
-                              <h2 class="accordion-header" id="occupation_sol">
-                                <button
-                                  class="accordion-button"
-                                  type="button"
-                                  data-bs-toggle="collapse"
-                                  data-bs-target="#alertes"
-                                  aria-expanded="true"
-                                  aria-controls="alertes"
-                                  id="bt"
-                                >
-                                  Pertubations
-                                </button>
-                              </h2>
-                              <div
-                                id="alertes"
-                                class="accordion-collapse collapse"
-                                aria-labelledby="occupation_sol"
-                              >
-                                <div class="accordion-body">
-                                  <div id="sub_themes" style="margin-left: 5%">
-                                    <div class="row">
-                                      <div
-                                        class="col-6"
-                                        style="margin-bottom: 10px"
-                                      >
-                                        <select
-                                          class="form-control"
-                                          [(ngModel)]="selectedYear"
-                                          (change)="onYearChange($event)"
-                                        >
-                                          <option
-                                            value=""
-                                            disabled
-                                            selected
-                                            style="font-size: 12px"
-                                          >
-                                            Filtre par date
-                                          </option>
-                                          <option
-                                            *ngFor="let annee of alertes"
-                                            [value]="annee.annee"
-                                          >
-                                            {{ annee.annee }}
-                                          </option>
-                                        </select>
-                                      </div>
-                                      <!-- Sélection du mois -->
-                                      <div class="col-6">
-                                        <select
-                                          class="form-control"
-                                          [(ngModel)]="selectedMonth"
-                                          (change)="onMonthChange($event)"
-                                        >
-                                          <option value="" selected>
-                                            Filtre par mois
-                                          </option>
-                                          <option
-                                            *ngFor="let mois of filteredMonths"
-                                            [value]="mois"
-                                          >
-                                            {{ mois }}
-                                          </option>
-                                        </select>
+                                            <span class="custom-tooltip">
+                                              <p>
+                                                La donnée sur les mangroves de
+                                                la province de l’ESTUAIRE a été
+                                                extraite de la cartographie de
+                                                l’occupation du sol réalisée par
+                                                l’AGEOS en 2020 puis affinée et
+                                                mise à jour pour l’année 2024 à
+                                                l’aide d’images satellitaires
+                                                Sentinel 1 et 2.
+                                              </p>
+                                              <p>
+                                                Source : Agence Gabonaise
+                                                d’Etudes et d’Observations
+                                                Spatiales (AGEOS)
+                                              </p>
+                                            </span>
+                                          </i>
+                                        </label>
                                       </div>
                                     </div>
-                                    <ul
-                                      class="list-unstyled"
-                                      style="margin-right: -100px"
+                                  </div>
+
+                                  <li class="myli">
+                                    <div
+                                      id="subItemthree"
+                                      class="collapse show"
                                     >
-                                      <li *ngFor="let annee of filteredDates">
-                                        <div class="row">
-                                          <div
-                                            class="d-flex align-items-center"
-                                          >
-                                            <button
-                                              class="btn btn-link text-decoration-none"
-                                              type="button"
-                                              data-bs-toggle="collapse"
-                                              [attr.data-bs-target]="
-                                                '#subItemtrie-' + annee.annee
-                                              "
-                                              aria-expanded="false"
-                                              [attr.aria-controls]="
-                                                'subItemtrie-' + annee.annee
-                                              "
-                                            >
-                                              <i
-                                                class="fa fa-caret-right me-2"
-                                              ></i>
-                                            </button>
-                                            <div class="form-check me-2">
-                                              <input
-                                                class="form-check-input"
-                                                type="checkbox"
-                                                style="border-radius: 50%"
-                                                [value]="annee"
-                                                [id]="'alertes-' + annee.annee"
-                                                [checked]="
-                                                  selectedAnnees[annee.annee] ||
-                                                  false
-                                                "
-                                                (change)="
-                                                  onAlertesCheckChange(
-                                                    $event,
-                                                    annee,
-                                                    true
-                                                  )
-                                                "
-                                              />
-
-                                              <label
-                                                class="form-check-label"
-                                                [for]="'alertes-' + annee.annee"
-                                              >
-                                                Année {{ annee.annee }}
-                                              </label>
-                                            </div>
-                                          </div>
-                                        </div>
-
-                                        <!-- Liste des dates collapsable -->
-                                        <div
-                                          [id]="'subItemtrie-' + annee.annee"
-                                          class="check"
+                                      <!-- container classes -->
+                                      <div
+                                        class="form-check d-flex align-items-center mb-2"
+                                        style="
+                                          position: relative;
+                                          bottom: 10px;
+                                          left: 10px;
+                                        "
+                                      >
+                                        <input
+                                          type="checkbox"
+                                          class="form-check-input"
+                                          value="estuaire"
+                                          style="border-radius: 50%"
+                                          checked
+                                          [(ngModel)]="mangrove_estuaire"
+                                          id="mangrove_estuaire"
+                                        />
+                                        <span
+                                          [style.backgroundColor]="'#450346'"
+                                          class="legend-checkbox"
+                                        ></span>
+                                        <label
+                                          [for]="mangrove_estuaire"
+                                          class="legend-element"
                                         >
-                                          <div
-                                            *ngFor="
-                                              let date of annee.date
-                                                | paginate
-                                                  : {
-                                                      itemsPerPage: 5,
-                                                      currentPage: p
-                                                    }
-                                            "
-                                            class="form-check d-flex align-items-center mb-2"
-                                          >
-                                            <input
-                                              type="checkbox"
-                                              style="border-radius: 50%"
-                                              [value]="date"
-                                              class="form-check-input"
-                                              [id]="'Ocheckbox-' + date"
-                                              (change)="
-                                                onAlertesCheckChange(
-                                                  $event,
-                                                  date,
-                                                  false
-                                                )
-                                              "
-                                              [checked]="
-                                                selectedDates[date] || false
-                                              "
-                                            />
-
-                                            <label
-                                              [for]="'Ocheckbox-' + date"
-                                              style="
-                                                font-size: 13px;
-                                                margin-top: 13px;
-                                                margin-left: 10px;
-                                              "
-                                            >
-                                              {{ date | date : "dd MMMM" }}
-                                            </label>
-                                          </div>
-
-                                          <!-- Pagination -->
-                                          <div
-                                            style="position: relative"
-                                            class="pag"
-                                          >
-                                            <pagination-controls
-                                              (pageChange)="p = $event"
-                                              [autoHide]="true"
-                                              [maxSize]="5"
-                                              [previousLabel]="''"
-                                              [nextLabel]="''"
-                                              [screenReaderPaginationLabel]="
-                                                'Pagination controls'
-                                              "
-                                              [screenReaderPageLabel]="'page'"
-                                            >
-                                            </pagination-controls>
-                                          </div>
-                                        </div>
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div class="accordion-item">
-                              <h2
-                                class="accordion-header"
-                                id="occupation_sol"
-                                disabled
-                              >
-                                <button
-                                  class="accordion-button"
-                                  type="button"
-                                  data-bs-toggle="collapse"
-                                  data-bs-target="#biomasse"
-                                  aria-expanded="true"
-                                  aria-controls="biomasse"
-                                  id="bt"
-                                  disabled
-                                >
-                                  Biomasse et carbone
-                                </button>
-                              </h2>
-                              <div
-                                id="biomasse"
-                                class="accordion-collapse collapse"
-                                aria-labelledby="occupation_sol"
-                              >
-                                <div class="accordion-body">
-                                  <div id="sub_themes" style="margin-left: 5%">
-                                    <ul class="list-unstyled">
-                                      <div class="row">
-                                        <div class="d-flex align-items-center">
-                                          <div class="form-check me-2">
-                                            <input
-                                              class="form-check-input"
-                                              type="checkbox"
-                                              value=""
-                                              id="mangroves"
-                                              style="border-radius: 50%"
-                                              disabled
-                                            />
-                                            <label
-                                              class="form-check-label"
-                                              for="mangroves"
-                                            >
-                                              Stockage de carbone
-                                            </label>
-                                          </div>
-                                          <br />
-                                        </div>
+                                          Mangroves de l'Estuaire
+                                        </label>
                                       </div>
-                                    </ul>
+                                    </div>
+                                  </li>
+                                </ul>
+                                <ul class="list-unstyled" id="magr">
+                                  <div class="row">
+                                    <div class="d-flex align-items-center">
+                                      <!-- Bouton avec la flèche -->
+                                      <button
+                                        id="btn"
+                                        class="btn btn-link text-decoration-none caret-subtitle"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#subItemOne"
+                                        aria-expanded="false"
+                                        aria-controls="subItemOne"
+                                      >
+                                        <i
+                                          class="fa fa-caret-right me-2"
+                                          id="iconSubOne"
+                                        ></i>
+                                      </button>
+
+                                      <!-- Checkbox avec étiquette -->
+                                      <div class="form-check me-2">
+                                        <input
+                                          class="form-check-input"
+                                          type="checkbox"
+                                          value=""
+                                          id="selectAllCheckbox"
+                                          style="border-radius: 50%"
+                                          (change)="toggleAllMangroves($event)"
+                                        />
+                                        <label
+                                          class="form-check-label"
+                                          for="selectAllCheckbox"
+                                          style="
+                                            font-size: 14px;
+                                            position: relative;
+                                          "
+                                        >
+                                          Espèces de mangroves
+                                          <i
+                                            class="btn-sm btn-warning fas fa-info info-legend-btn"
+                                            style="
+                                              border-radius: 50%;
+                                              font-size: 10px;
+                                            "
+                                            ><span class="custom-tooltip">
+                                              <p>
+                                                La répartition spatiale des
+                                                espèces de mangroves a été
+                                                réalisée sur Libreville et ses
+                                                environs uniquement à l’aide
+                                                d’images Sentinel 2 validée sur
+                                                la base de connaissances de
+                                                terrain.
+                                              </p>
+                                              <p>
+                                                Elle est caractérisée par un
+                                                fort recouvrement spatial du
+                                                genre Rhizophora (racemosa et
+                                                harrisonii). Les Rhizophora
+                                                racemosa sont principalement
+                                                situés en amont de l’estuaire du
+                                                Komo, particulièrement sur la
+                                                rive sud près de l’embouchure de
+                                                la rivière Remboué. Cette espèce
+                                                est aussi localisée en ilots sur
+                                                la rive gauche de l’estuaire de
+                                                la Mondah.
+                                              </p>
+                                              <p>
+                                                Les Rhizophora harrisonii
+                                                mélangés aux Avicennia germinans
+                                                sont situés plutôt vers le
+                                                centre de l’estuaire du Komo,
+                                                particulièrement sur la rive
+                                                sud, mais aussi sur la rive nord
+                                                vers Donguila. Contrairement aux
+                                                mangroves de Guyane française où
+                                                la vase récente est colonisée
+                                                par de jeunes Avicennia, sur la
+                                                côte ouest africaine, en
+                                                revanche, la mangrove frontale
+                                                est essentiellement dominée,
+                                                dans les estuaires, delta et le
+                                                long des rivières, par les
+                                                Rhizophora. Ainsi, selon les
+                                                observations faites sur le
+                                                terrain, un premier rideau de
+                                                Rhizophora harrisonii longe les
+                                                berges, alors que les Avicennia
+                                                germinans sont en arrière-plan.
+                                                Les Rhizophora harrisonii
+                                                dominent les mangroves de
+                                                l’estuaire de la Mondah. Les
+                                                Rhizophora mangle sont
+                                                endémiques qu’exclusivement à la
+                                                rivière Lowé. Situées en zone
+                                                urbaine, elles sont très
+                                                menacées.
+                                              </p>
+                                              <p>
+                                                Le genre Avicennia, minoritaire,
+                                                reste difficilement identifiable
+                                                à l’échelle provinciale du fait
+                                                de son faible recouvrement
+                                                spatial. Les Avicennia germinans
+                                                se mêlent généralement aux
+                                                Rhizophora harrisonii, ou bien
+                                                ils sont présents en ilots comme
+                                                à Moka et Mamboumba.
+                                              </p>
+                                              <p>
+                                                Source : Laboratoire de
+                                                Géomatique, de Recherche
+                                                Appliquée et de Conseil (2019)
+                                              </p>
+                                            </span></i
+                                          >
+                                        </label>
+                                      </div>
+                                    </div>
                                   </div>
-                                </div>
+
+                                  <li class="myli">
+                                    <div id="subItemOne" class="collapse show">
+                                      <!-- container classes -->
+                                      <div
+                                        *ngFor="let c of especes"
+                                        class="form-check d-flex align-items-center mb-2"
+                                        style="
+                                          position: relative;
+                                          bottom: 10px;
+                                          left: 10px;
+                                        "
+                                      >
+                                        <input
+                                          type="checkbox"
+                                          class="form-check-input"
+                                          value="{{ c.id }}"
+                                          style="border-radius: 50%"
+                                          [(ngModel)]="c.selected"
+                                          (change)="onMangroveCheckChange(c)"
+                                          [id]="'checkbox-' + c.id"
+                                        />
+                                        <span
+                                          [style.backgroundColor]="
+                                            c.code_couleur
+                                          "
+                                          class="legend-checkbox"
+                                        ></span>
+                                        <label
+                                          [for]="'checkbox-' + c.id"
+                                          class="legend-element"
+                                        >
+                                          {{ c.libelle }}
+                                        </label>
+                                      </div>
+                                    </div>
+                                  </li>
+                                </ul>
+                                <ul class="list-unstyled" id="occ">
+                                  <div class="row">
+                                    <div class="d-flex align-items-center">
+                                      <!-- Bouton avec la flèche -->
+                                      <button
+                                        id="btn"
+                                        class="btn btn-link text-decoration-none caret-subtitle"
+                                        aria-expanded="true"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#subItemtwo"
+                                        aria-expanded="false"
+                                        aria-controls="subItemOne"
+                                      >
+                                        <i
+                                          class="fa fa-caret-right me-2"
+                                          id="iconSubOne"
+                                        ></i>
+                                      </button>
+
+                                      <!-- Checkbox avec étiquette -->
+                                      <div class="form-check me-2">
+                                        <input
+                                          class="form-check-input"
+                                          type="checkbox"
+                                          style="border-radius: 50%"
+                                          id="selectAllCheckboxs"
+                                          (change)="
+                                            toggleAllOccupations($event)
+                                          "
+                                        />
+                                        <label
+                                          class="form-check-label"
+                                          for="selectAllCheckboxs"
+                                          style="
+                                            font-size: 14px;
+                                            position: relative;
+                                          "
+                                        >
+                                          Autres occupations du sol
+                                          <i
+                                            class="btn-sm btn-warning fas fa-info info-legend-btn"
+                                            style="
+                                              border-radius: 50%;
+                                              font-size: 10px;
+                                            "
+                                            ><span class="custom-tooltip"
+                                              >Description type de mangrove
+                                              Description type de mangrove
+                                              Description type de mangrove</span
+                                            ></i
+                                          >
+                                        </label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <li class="myli">
+                                    <div
+                                      id="subItemtwo"
+                                      class="collapse"
+                                      style="
+                                        position: relative;
+                                        bottom: 10px;
+                                        left: 10px;
+                                      "
+                                    >
+                                      <!-- container classes -->
+                                      <div
+                                        *ngFor="let c of classe"
+                                        class="form-check d-flex align-items-center mb-2"
+                                      >
+                                        <input
+                                          type="checkbox"
+                                          value="{{ c.id }}"
+                                          class="form-check-input"
+                                          style="border-radius: 50%"
+                                          [(ngModel)]="c.selected"
+                                          (change)="onOccupationCheckChange(c)"
+                                          [id]="'Ocheckbox-' + c.id"
+                                        />
+                                        <span
+                                          [style.backgroundColor]="
+                                            c.code_couleur
+                                          "
+                                          class="legend-checkbox"
+                                        ></span>
+                                        <label
+                                          [for]="'Ocheckbox-' + c.id"
+                                          class="legend-element"
+                                        >
+                                          {{ c.libelle }}
+                                        </label>
+                                      </div>
+                                    </div>
+                                  </li>
+                                </ul>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <!-- Affichage des graphes statistiques et statistiques de selection -->
-                        <div class="tab-pane" id="statistiques">
-                          <div *ngIf="globalStatActive">
-                            <h4
-                              class="text-center mt-3 mb-2 pb-2"
-                              style="font-size: 18px; border: 2px solid #275336"
+
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="alerts">
+                            <button
+                              class="accordion-button collapsed"
+                              type="button"
+                              data-bs-toggle="collapse"
+                              data-bs-target="#alertes"
+                              aria-expanded="false"
+                              aria-controls="alertes"
+                              id="bt"
                             >
-                              Statistiques Generales
-                            </h4>
-                            <div class="row mb-3" style="padding: 0 5px 0 5px">
-                              <div
-                                class="btn-group"
-                                role="group"
-                                aria-label="Basic example"
-                              >
-                                <button
-                                  type="button"
-                                  class="btn btn-success"
-                                  (click)="statsMangroves()"
-                                >
-                                  Mangroves
-                                </button>
-                                <button
-                                  type="button"
-                                  class="btn btn-warning"
-                                  (click)="statsAlertes()"
-                                >
-                                  Pertubations
-                                </button>
-                              </div>
-                            </div>
-                            <div class="row" *ngIf="activeStatMangroves">
-                              <div
-                                class="col-sm-12 col-md-12 text-center"
-                                style="height: 300px"
-                              >
-                                <div style="width: 100%; align-items: center">
+                              Pertubations
+                            </button>
+                          </h2>
+                          <div
+                            id="alertes"
+                            class="accordion-collapse collapse"
+                            aria-labelledby="alerts"
+                            data-bs-parent="#main_themes"
+                          >
+                            <div class="accordion-body">
+                              <div id="sub_themes" style="margin-left: 5%">
+                                <div class="row">
                                   <div
-                                    id="sup-annee"
-                                    style="height: 250px; width: 100%"
-                                  ></div>
-                                </div>
-                              </div>
-                              <hr style="margin-top: 15px" />
-                              <div
-                                class="col-sm-12 col-md-12 text-center"
-                                style="height: 300px"
-                              >
-                                <div style="width: 100%; align-items: center">
-                                  <div
-                                    id="chartSuperficieEspece"
-                                    style="height: 250px; width: 100%"
-                                  ></div>
-                                </div>
-                              </div>
-                              <hr style="margin-top: 15px" />
-                              <div
-                                class="col-sm-12 col-md-12 text-center"
-                                style="height: 300px; align-items: center"
-                              >
-                                <select
-                                  class="form-control form-control-sm"
-                                  style="width: 250px"
-                                  [(ngModel)]="selectedCommune"
-                                  (change)="reloadChart()"
-                                >
-                                  <option>Choisir</option>
-                                  <option
-                                    *ngFor="let item of communes"
-                                    [value]="item.id"
+                                    class="col-6"
+                                    style="margin-bottom: 10px"
                                   >
-                                    {{ item.libelle }}
-                                  </option>
-                                  <option [value]="null">Autres</option>
-                                </select>
-                                <div style="width: 100%; align-items: center">
-                                  <div
-                                    id="chartMangroveCommune"
-                                    style="height: 250px; width: 100%"
-                                  ></div>
+                                    <select
+                                      class="form-control"
+                                      [(ngModel)]="selectedYear"
+                                      (change)="onYearChange($event)"
+                                    >
+                                      <option
+                                        value=""
+                                        disabled
+                                        selected
+                                        style="font-size: 12px"
+                                      >
+                                        Filtre par date
+                                      </option>
+                                      <option
+                                        *ngFor="let annee of alertes"
+                                        [value]="annee.annee"
+                                      >
+                                        {{ annee.annee }}
+                                      </option>
+                                    </select>
+                                  </div>
+                                  <!-- Sélection du mois -->
+                                  <div class="col-6">
+                                    <select
+                                      class="form-control"
+                                      [(ngModel)]="selectedMonth"
+                                      (change)="onMonthChange($event)"
+                                    >
+                                      <option value="" selected>
+                                        Filtre par mois
+                                      </option>
+                                      <option
+                                        *ngFor="let mois of filteredMonths"
+                                        [value]="mois"
+                                      >
+                                        {{ mois }}
+                                      </option>
+                                    </select>
+                                  </div>
                                 </div>
-                              </div>
-                            </div>
-                            <div class="row" *ngIf="activeStatAlerts">
-                              <!-- <hr style="margin-top: 15px" /> -->
-                              <div
-                                class="col-sm-12 col-md-12 text-center"
-                                style="height: 300px"
-                              >
-                                <div style="width: 100%; align-items: center">
-                                  <div
-                                    id="chartMonthlyAlerts"
-                                    style="height: 250px; width: 100%"
-                                  ></div>
-                                </div>
+                                <ul
+                                  class="list-unstyled"
+                                  style="margin-right: -100px"
+                                >
+                                  <li *ngFor="let annee of filteredDates">
+                                    <div class="row">
+                                      <div class="d-flex align-items-center">
+                                        <button
+                                          class="btn btn-link text-decoration-none"
+                                          type="button"
+                                          data-bs-toggle="collapse"
+                                          [attr.data-bs-target]="
+                                            '#subItemtrie-' + annee.annee
+                                          "
+                                          aria-expanded="false"
+                                          [attr.aria-controls]="
+                                            'subItemtrie-' + annee.annee
+                                          "
+                                        >
+                                          <i class="fa fa-caret-right me-2"></i>
+                                        </button>
+                                        <div class="form-check me-2">
+                                          <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            style="border-radius: 50%"
+                                            [value]="annee"
+                                            [id]="'alertes-' + annee.annee"
+                                            [checked]="
+                                              selectedAnnees[annee.annee] ||
+                                              false
+                                            "
+                                            (change)="
+                                              onAlertesCheckChange(
+                                                $event,
+                                                annee,
+                                                true
+                                              )
+                                            "
+                                          />
+
+                                          <label
+                                            class="form-check-label"
+                                            [for]="'alertes-' + annee.annee"
+                                            style="
+                                              font-size: 14px;
+                                              position: relative;
+                                            "
+                                          >
+                                            Pertubations mensuelles
+                                            {{ annee.annee }}
+                                          </label>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <!-- Liste des dates collapsable -->
+                                    <div
+                                      [id]="'subItemtrie-' + annee.annee"
+                                      class="check"
+                                    >
+                                      <div
+                                        *ngFor="
+                                          let date of annee.date
+                                            | paginate
+                                              : {
+                                                  itemsPerPage: 5,
+                                                  currentPage: p
+                                                }
+                                        "
+                                        class="form-check d-flex align-items-center mb-2"
+                                        style="
+                                          position: relative;
+                                          bottom: 10px;
+                                          left: 10px;
+                                        "
+                                      >
+                                        <input
+                                          type="checkbox"
+                                          style="border-radius: 50%"
+                                          [value]="date"
+                                          class="form-check-input"
+                                          [id]="'Ocheckbox-' + date"
+                                          (change)="
+                                            onAlertesCheckChange(
+                                              $event,
+                                              date,
+                                              false
+                                            )
+                                          "
+                                          [checked]="
+                                            selectedDates[date] || false
+                                          "
+                                        />
+
+                                        <label
+                                          [for]="'Ocheckbox-' + date"
+                                          class="legend-element"
+                                        >
+                                          {{ date | date : "dd MMMM" }}
+                                        </label>
+                                      </div>
+
+                                      <!-- Pagination -->
+                                      <div
+                                        style="position: relative"
+                                        class="pag legend-element"
+                                      >
+                                        <pagination-controls
+                                          (pageChange)="p = $event"
+                                          [autoHide]="true"
+                                          [maxSize]="5"
+                                          [previousLabel]="''"
+                                          [nextLabel]="''"
+                                          [screenReaderPaginationLabel]="
+                                            'Pagination controls'
+                                          "
+                                          [screenReaderPageLabel]="'page'"
+                                        >
+                                        </pagination-controls>
+                                      </div>
+                                    </div>
+                                  </li>
+                                </ul>
                               </div>
                             </div>
                           </div>
-                          <div *ngIf="!globalStatActive">
-                            <div class="accordion" id="main_themes">
-                              <div class="accordion-item">
-                                <h4
-                                  class="text-center mt-3 mb-5 pb-2"
-                                  style="
-                                    font-size: 18px;
-                                    border: 2px solid #275336;
-                                  "
-                                >
-                                  Statistiques par zone
-                                </h4>
-                                <div class="row">
-                                  <div class="col-md-12">
-                                    <table
-                                      class="table table-bordered"
-                                      style="font-size: 11px"
-                                    >
-                                      <thead>
-                                        <tr></tr>
-                                        <tr>
-                                          <th>Espèces</th>
-                                          <th>Superficie (m²)</th>
-                                          <th>Hauteur (m)</th>
-                                        </tr>
-                                      </thead>
+                        </div>
 
-                                      <tbody id="dynamique_especes">
-                                        <tr
-                                          *ngIf="
-                                            selectedMangrove &&
-                                              filteredMangroveData.length === 0;
-                                            else filteredTemplate
-                                          "
+                        <div class="accordion-item">
+                          <h2
+                            class="accordion-header"
+                            id="occupation_sol"
+                            disabled
+                          >
+                            <button
+                              class="accordion-button"
+                              type="button"
+                              data-bs-toggle="collapse"
+                              data-bs-target="#biomasse"
+                              aria-expanded="false"
+                              aria-controls="biomasse"
+                              id="bt"
+                              disabled
+                            >
+                              Biomasse et carbone
+                            </button>
+                          </h2>
+                          <div
+                            id="biomasse"
+                            class="accordion-collapse collapse"
+                            aria-labelledby="occupation_sol"
+                          >
+                            <div class="accordion-body">
+                              <div id="sub_themes" style="margin-left: 5%">
+                                <ul class="list-unstyled">
+                                  <div class="row">
+                                    <div class="d-flex align-items-center">
+                                      <div class="form-check me-2">
+                                        <input
+                                          class="form-check-input"
+                                          type="checkbox"
+                                          value=""
+                                          id="mangroves"
+                                          style="border-radius: 50%"
+                                          disabled
+                                        />
+                                        <label
+                                          class="form-check-label"
+                                          for="mangroves"
                                         >
-                                          <td class="text-center">
-                                            {{ selectedMangrove.type }}
-                                          </td>
-                                          <td class="text-center">
-                                            {{
-                                              selectedMangrove.surface
-                                                | number : "1.5-5"
-                                            }}
-                                          </td>
-                                          <td class="text-center">
-                                            {{ selectedMangrove.hauteur }}
-                                          </td>
-                                        </tr>
-                                      </tbody>
-
-                                      <!-- Afficher la liste des mangroves filtrées | number: '1.5-5'  -->
-                                      <ng-template #filteredTemplate>
-                                        <tr
-                                          *ngFor="
-                                            let mangrove of filteredMangroveData
-                                          "
-                                        >
-                                          <td class="text-center">
-                                            {{ mangrove.type__libelle }}
-                                          </td>
-                                          <td class="text-center">
-                                            {{
-                                              mangrove.surface
-                                                | number : "1.5-5"
-                                            }}
-                                          </td>
-                                          <td class="text-center">
-                                            {{ mangrove.hauteur }}
-                                          </td>
-                                        </tr>
-                                        <tr
-                                          *ngIf="
-                                            filteredMangroveData.length === 0
-                                          "
-                                        >
-                                          <td colspan="3" class="text-center">
-                                            Aucune donnée disponible.
-                                          </td>
-                                        </tr>
-                                      </ng-template>
-                                    </table>
-                                    <table
-                                      class="table table-bordered"
-                                      style="font-size: 11px"
-                                    >
-                                      <thead>
-                                        <tr></tr>
-                                        <tr>
-                                          <th>Alerte N°</th>
-                                          <th>date</th>
-                                        </tr>
-                                      </thead>
-
-                                      <tbody id="dynamique_especes">
-                                        <tr
-                                          *ngIf="
-                                            filteredMangroveDatas.length === 0;
-                                            else filteredTemplates
-                                          "
-                                        >
-                                          <td class="text-center"></td>
-                                          <td class="text-center"></td>
-                                        </tr>
-                                      </tbody>
-
-                                      <!-- Afficher la liste des mangroves filtrées | number: '1.5-5'  -->
-                                      <ng-template #filteredTemplates>
-                                        <tr
-                                          *ngFor="
-                                            let mangrove of filteredMangroveDatas
-                                          "
-                                        >
-                                          <td class="text-center">
-                                            {{ mangrove.id }}
-                                          </td>
-                                          <td class="text-center">
-                                            {{ mangrove.dates }}
-                                          </td>
-                                        </tr>
-                                        <tr
-                                          *ngIf="
-                                            filteredMangroveDatas.length === 0
-                                          "
-                                        >
-                                          <td colspan="3" class="text-center">
-                                            Aucune donnée disponible.
-                                          </td>
-                                        </tr>
-                                      </ng-template>
-                                    </table>
-
-                                    <table
-                                      class="table table-bordered"
-                                      style="font-size: 11px"
-                                    >
-                                      <thead>
-                                        <tr>
-                                          <th class="text-center">
-                                            Stockage de carbone
-                                          </th>
-                                        </tr>
-                                      </thead>
-                                      <tbody id="area_typologie">
-                                        <tr>
-                                          <td
-                                            colspan="2"
-                                            id="departement"
-                                            class="text-center"
-                                          >
-                                            Aucune donnée disponible
-                                          </td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
+                                          Stockage de carbone
+                                        </label>
+                                      </div>
+                                      <br />
+                                    </div>
                                   </div>
-                                </div>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Affichage des graphes statistiques et statistiques de selection -->
+                    <div class="tab-pane" id="statistiques">
+                      <div *ngIf="globalStatActive">
+                        <h4
+                          class="text-center mt-3 mb-2 pb-2"
+                          style="font-size: 18px; border: 2px solid #275336"
+                        >
+                          Statistiques Generales
+                        </h4>
+                        <div class="row mb-3" style="padding: 0 5px 0 5px">
+                          <div
+                            class="btn-group"
+                            role="group"
+                            aria-label="Basic example"
+                          >
+                            <button
+                              type="button"
+                              class="btn btn-success"
+                              (click)="statsMangroves()"
+                            >
+                              Mangroves
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-warning"
+                              (click)="statsAlertes()"
+                            >
+                              Pertubations
+                            </button>
+                          </div>
+                        </div>
+                        <div class="row" *ngIf="activeStatMangroves">
+                          <div
+                            class="col-sm-12 col-md-12 text-center"
+                            style="height: 300px"
+                          >
+                            <div style="width: 100%; align-items: center">
+                              <div
+                                id="sup-annee"
+                                style="height: 250px; width: 100%"
+                              ></div>
+                            </div>
+                          </div>
+                          <hr style="margin-top: 15px" />
+                          <div
+                            class="col-sm-12 col-md-12 text-center"
+                            style="height: 300px"
+                          >
+                            <div style="width: 100%; align-items: center">
+                              <div
+                                id="chartSuperficieEspece"
+                                style="height: 250px; width: 100%"
+                              ></div>
+                            </div>
+                          </div>
+                          <hr style="margin-top: 15px" />
+                          <div
+                            class="col-sm-12 col-md-12 text-center"
+                            style="height: 300px; align-items: center"
+                          >
+                            <select
+                              class="form-control form-control-sm"
+                              style="width: 250px"
+                              [(ngModel)]="selectedCommune"
+                              (change)="reloadChart()"
+                            >
+                              <option>Choisir</option>
+                              <option
+                                *ngFor="let item of communes"
+                                [value]="item.id"
+                              >
+                                {{ item.libelle }}
+                              </option>
+                              <option [value]="null">Autres</option>
+                            </select>
+                            <div style="width: 100%; align-items: center">
+                              <div
+                                id="chartMangroveCommune"
+                                style="height: 250px; width: 100%"
+                              ></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row" *ngIf="activeStatAlerts">
+                          <!-- <hr style="margin-top: 15px" /> -->
+                          <div
+                            class="col-sm-12 col-md-12 text-center"
+                            style="height: 300px"
+                          >
+                            <div style="width: 100%; align-items: center">
+                              <div
+                                id="chartMonthlyAlerts"
+                                style="height: 250px; width: 100%"
+                              ></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div *ngIf="!globalStatActive">
+                        <div class="accordion" id="main_themes">
+                          <div class="accordion-item">
+                            <h4
+                              class="text-center mt-3 mb-5 pb-2"
+                              style="font-size: 18px; border: 2px solid #275336"
+                            >
+                              Statistiques par zone
+                            </h4>
+                            <div class="row">
+                              <div class="col-md-12">
+                                <table
+                                  class="table table-bordered"
+                                  style="font-size: 11px"
+                                >
+                                  <thead>
+                                    <tr></tr>
+                                    <tr>
+                                      <th>Espèces</th>
+                                      <th>Superficie (m²)</th>
+                                      <th>Hauteur (m)</th>
+                                    </tr>
+                                  </thead>
+
+                                  <tbody id="dynamique_especes">
+                                    <tr
+                                      *ngIf="
+                                        selectedMangrove &&
+                                          filteredMangroveData.length === 0;
+                                        else filteredTemplate
+                                      "
+                                    >
+                                      <td class="text-center">
+                                        {{ selectedMangrove.type }}
+                                      </td>
+                                      <td class="text-center">
+                                        {{
+                                          selectedMangrove.surface
+                                            | number : "1.5-5"
+                                        }}
+                                      </td>
+                                      <td class="text-center">
+                                        {{ selectedMangrove.hauteur }}
+                                      </td>
+                                    </tr>
+                                  </tbody>
+
+                                  <!-- Afficher la liste des mangroves filtrées | number: '1.5-5'  -->
+                                  <ng-template #filteredTemplate>
+                                    <tr
+                                      *ngFor="
+                                        let mangrove of filteredMangroveData
+                                      "
+                                    >
+                                      <td class="text-center">
+                                        {{ mangrove.type__libelle }}
+                                      </td>
+                                      <td class="text-center">
+                                        {{
+                                          mangrove.surface | number : "1.5-5"
+                                        }}
+                                      </td>
+                                      <td class="text-center">
+                                        {{ mangrove.hauteur }}
+                                      </td>
+                                    </tr>
+                                    <tr
+                                      *ngIf="filteredMangroveData.length === 0"
+                                    >
+                                      <td colspan="3" class="text-center">
+                                        Aucune donnée disponible.
+                                      </td>
+                                    </tr>
+                                  </ng-template>
+                                </table>
+                                <table
+                                  class="table table-bordered"
+                                  style="font-size: 11px"
+                                >
+                                  <thead>
+                                    <tr></tr>
+                                    <tr>
+                                      <th>Alerte N°</th>
+                                      <th>date</th>
+                                    </tr>
+                                  </thead>
+
+                                  <tbody id="dynamique_especes">
+                                    <tr
+                                      *ngIf="
+                                        filteredMangroveDatas.length === 0;
+                                        else filteredTemplates
+                                      "
+                                    >
+                                      <td class="text-center"></td>
+                                      <td class="text-center"></td>
+                                    </tr>
+                                  </tbody>
+
+                                  <!-- Afficher la liste des mangroves filtrées | number: '1.5-5'  -->
+                                  <ng-template #filteredTemplates>
+                                    <tr
+                                      *ngFor="
+                                        let mangrove of filteredMangroveDatas
+                                      "
+                                    >
+                                      <td class="text-center">
+                                        {{ mangrove.id }}
+                                      </td>
+                                      <td class="text-center">
+                                        {{ mangrove.dates }}
+                                      </td>
+                                    </tr>
+                                    <tr
+                                      *ngIf="filteredMangroveDatas.length === 0"
+                                    >
+                                      <td colspan="3" class="text-center">
+                                        Aucune donnée disponible.
+                                      </td>
+                                    </tr>
+                                  </ng-template>
+                                </table>
+
+                                <table
+                                  class="table table-bordered"
+                                  style="font-size: 11px"
+                                >
+                                  <thead>
+                                    <tr>
+                                      <th class="text-center">
+                                        Stockage de carbone
+                                      </th>
+                                    </tr>
+                                  </thead>
+                                  <tbody id="area_typologie">
+                                    <tr>
+                                      <td
+                                        colspan="2"
+                                        id="departement"
+                                        class="text-center"
+                                      >
+                                        Aucune donnée disponible
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
                               </div>
                             </div>
                           </div>
@@ -951,8 +1131,7 @@
 
             <div
               id="map"
-              [ngClass]="{ hidden: isStatVisible }"
-              style="border: 2px solid green; height: 86vh"
+              style="border: 2px solid green; height: 86vh; z-index: 0"
             >
               <div *ngIf="loading" class="loading-indicator">
                 <div class="spinner-border text-danger" role="status">

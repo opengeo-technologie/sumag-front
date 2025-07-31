@@ -17,7 +17,13 @@
 }
 
 /* Ajustements pour les petits écrans */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
+} */
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .tablet-full-height {
+    height: 100vh;
+  }
   #top_title {
     padding-left: 30%;
     padding-right: 30%;

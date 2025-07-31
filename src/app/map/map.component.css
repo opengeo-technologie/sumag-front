@@ -194,6 +194,12 @@ pagination-controls {
   padding-left: 5px;
 }
 
+#right_menu {
+  overflow: visible;
+  position: relative;
+  height: 80vh;
+}
+
 #right_menu .nav-fill {
   padding-right: 0px;
 }
@@ -227,29 +233,64 @@ pagination-controls {
   border: 1px solid #000;
 }
 
-.legend-element .custom-tooltip {
-  visibility: hidden;
-  background-color: rgb(17, 16, 16, 0.7);
-  color: #fff;
-  width: 150px;
-  height: auto;
-  text-align: justify;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  border-radius: 4px;
-  padding: 5px;
-  position: absolute;
-  z-index: 1;
-  bottom: -30%; /* Position above the anchor */
-  left: 75%;
-  transform: translateX(-50%);
-  opacity: 0;
-  transition: opacity 0.3s;
-  /* white-space: nowrap; */
+.info-legend-btn {
+  position: relative;
+  display: inline-block;
+  overflow: visible; /* allow content to overflow */
 }
 
-.legend-element:hover .custom-tooltip {
-  visibility: visible;
+.tab-pane,
+.accordion {
+  overflow: visible !important;
+}
+
+.tab-content,
+.accordion-body {
+  z-index: 1;
+  position: relative;
+}
+
+.collapsible {
+  overflow: visible !important;
+  position: relative;
+}
+
+.info-legend-btn .custom-tooltip {
+  display: none;
+  overflow: visible !important;
+  width: 500px;
+  background-color: #333;
+  color: #fff;
+  text-align: justify;
+  line-height: 20px;
+  padding: 6px;
+  border-radius: 4px;
+  position: absolute;
+  top: 50%;
+  left: 105%; /* Move it to the right of the button */
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 1.3s;
+  z-index: 9999 !important;
+  /* white-space: nowrap; */
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+.info-legend-btn:hover .custom-tooltip::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  transform: translateY(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent #333 transparent transparent;
+}
+
+.info-legend-btn:hover .custom-tooltip {
+  display: block;
   opacity: 1;
 }
 

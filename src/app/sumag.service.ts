@@ -28,8 +28,8 @@ interface SuperficieData {
   providedIn: 'root',
 })
 export class ApiService {
-  // private apiUrl = 'http://41.159.150.24';
-  private apiUrl = 'http://127.0.0.1:8000/';
+  private apiUrl = 'http://41.159.150.24';
+  // private apiUrl = 'http://127.0.0.1:8000/';
   private geoserverUrl = 'http://41.159.150.28:8080/geoserver/ageos_base/wfs';
 
   constructor(private http: HttpClient, private toastr: ToastrService) {}
@@ -132,6 +132,10 @@ export class ApiService {
     return this.http.get<any[]>(
       `${this.apiUrl}/carte/api/superficie_mangrove_estuaire`
     );
+  }
+
+  getCentroidAlerts(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/carte/api/centroides_alertes`);
   }
 
   getArchive(): Observable<Archive[]> {
